@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * 
  * JUnit-Test zur Klasse Konto
  * 
  * @see de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto.Konto
