@@ -21,12 +21,68 @@ public class Tree {
 		headNode = null;
 	}
 	
-	public void addNode(Node node){
-				
+	/**
+	 * neuer Knoten wird hinzugefügt
+	 * @param nodeNew
+	 */
+	public void addNode(Node nodeNew){
+			
+		if(headNode == null){
+			
+			headNode = nodeNew;
+			
+		}else{
+			
+			sortNode(headNode, nodeNew);
+			
+		}
 	}
 	
+	
+	/**
+	 * sortiert den neuen Knoten an die richtige Stelle im binären Baum ein
+	 * @param nodeEnd
+	 * @param nodeNew
+	 */
+	private void sortNode(Node nodeEnd, Node nodeNew){
+		
+		//überprüft den Hashwert des neuen Knoten und fügt ihn entsprechend links oder rechts ein
+		
+		//linker Kindknoten
+		if(nodeEnd.getHash() > nodeNew.getHash()){
+			
+			//überprüft, ob der Kindknoten leer ist und fügt den neuen Knoten an dieser Stelle hinzu
+			if(nodeEnd.getLeft() == null){
+			
+				nodeEnd.setLeft(nodeNew);
+				
+			}else{
+				//Kindknoten war nicht leer, also werden die Kindknoten des aktuellen Kindknoten überprüft
+				sortNode(nodeEnd.getLeft(),nodeNew);
+			}
+			
+		//rechter Kindknoten	
+		}else{
+			
+			
+			if(nodeEnd.getRight() == null){
+			
+				nodeEnd.setRight(nodeNew);
+				
+			}else{
+			
+				sortNode(nodeEnd.getRight(), nodeNew);
+				
+			}
+			
+		
+		}
+	
+	}
+	
+	
 
-	public class Node<K,V>{
+	class Node<K,V>{
 		
 		private K key;
 		private V value;
