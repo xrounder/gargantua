@@ -11,11 +11,11 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
  */
 public class Tree<K,V> {
 	
-	private Node headNode;
+	private Node root;
 	
 	public Tree(){
 		
-		headNode = null;
+		root = null;
 	}
 	
 	
@@ -28,22 +28,26 @@ public class Tree<K,V> {
 			
 		Node nodeNew = new Node(key, value);
 		
-		if(headNode == null){
+		if(root == null){
 			
-			headNode = nodeNew;
+			root = nodeNew;
 			
 		}else{
 			
-			sortNode(headNode, nodeNew);
+			sortNode(root, nodeNew);
 			
 		}
 	}
 	
-	public Node getHeadnode(){
+	public Node getRoot(){
 		
-		return headNode;
+		return root;
 	}
 	
+	public void setRoot(Node wert){
+		
+		root=wert;
+	}
 		
 	/**
 	 * sortiert den neuen Knoten an die richtige Stelle im binären Baum ein
@@ -55,7 +59,7 @@ public class Tree<K,V> {
 		//überprüft den Hashwert des neuen Knoten und fügt ihn entsprechend links oder rechts ein
 		
 		//linker Kindknoten
-		if(nodeEnd.getHash() > nodeNew.getHash()){
+		if(nodeEnd.hashCode() > nodeNew.hashCode()){
 			
 			//überprüft, ob der Kindknoten leer ist und fügt den neuen Knoten an dieser Stelle hinzu
 			if(nodeEnd.getLeft() == null){
@@ -95,8 +99,7 @@ public class Tree<K,V> {
 		
 		private K key;
 		private V value;
-		private int hash;
-		
+	
 		private Node left;
 		private Node right;
 
@@ -125,11 +128,16 @@ public class Tree<K,V> {
 			this.right = right;
 		}
 
-		public int getHash(){
-			
-			return hash;
+		
+		@Override
+		public int hashCode() {
+		
+			return super.hashCode();
+		
 		}
 		
+		
+	
 		public V getValue(){
 			
 			return value;
