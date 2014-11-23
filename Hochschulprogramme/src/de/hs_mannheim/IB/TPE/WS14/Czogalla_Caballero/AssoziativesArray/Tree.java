@@ -3,16 +3,13 @@
  */
 package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
 
-import java.lang.reflect.GenericDeclaration;
-
-import org.omg.CORBA.portable.ValueBase;
 
 /**
  * Binärbaum, der intern Knoten mit generischen Typen verwendet
  * @author 1414163 Miguel Caballero, 1410116 Dennis Czogalla
  *
  */
-public class Tree {
+public class Tree<K,V> {
 	
 	private Node headNode;
 	
@@ -21,12 +18,16 @@ public class Tree {
 		headNode = null;
 	}
 	
+	
+	
 	/**
 	 * neuer Knoten wird hinzugefügt
 	 * @param nodeNew
 	 */
-	public void addNode(Node nodeNew){
+	public void addNode(K key, V value){
 			
+		Node nodeNew = new Node(key, value);
+		
 		if(headNode == null){
 			
 			headNode = nodeNew;
@@ -38,7 +39,12 @@ public class Tree {
 		}
 	}
 	
+	public Node getHeadnode(){
+		
+		return headNode;
+	}
 	
+		
 	/**
 	 * sortiert den neuen Knoten an die richtige Stelle im binären Baum ein
 	 * @param nodeEnd
@@ -81,8 +87,11 @@ public class Tree {
 	}
 	
 	
-
-	class Node<K,V>{
+	
+	
+	
+	
+	class Node{
 		
 		private K key;
 		private V value;

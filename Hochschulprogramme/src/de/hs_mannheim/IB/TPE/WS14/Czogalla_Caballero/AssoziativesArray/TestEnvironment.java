@@ -14,8 +14,12 @@ public class TestEnvironment {
 	 */
 	public static void main(String[] args) {
 		
+		Tree<String, Integer> tree = new Tree<String,Integer>();
+	
+		tree.addNode("Test", 2);
 		
-		
+		System.out.println(tree.getHeadnode().getValue());
+		System.out.println(tree.getHeadnode().getKey());
 	}
 
 }

@@ -10,9 +10,9 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
  */
 public class AssociativeArray<K,V> implements IAssociativeArray {
 
-	private Tree tree;
 
 	public AssociativeArray(){
+		
 		
 		
 	}
