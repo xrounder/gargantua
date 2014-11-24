@@ -12,29 +12,35 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
 public class Tree<K,V> {
 	
 	private Node root;
+	private int countNodes;
 	
 	public Tree(){
 		
 		root = null;
+		countNodes = 0;
 	}
 	
-	
-	
+	public int getcountNodes(){
+		
+		return countNodes;
+	}
 	/**
 	 * neuer Knoten wird hinzugefügt
 	 * @param nodeNew
 	 */
+	
 	public void addNode(K key, V value){
 			
-		Node nodeNew = new Node(key, value);
+		Node child = new Node(key, value);
+		countNodes++;
 		
 		if(root == null){
 			
-			root = nodeNew;
+			root = child;
 			
 		}else{
 			
-			sortNode(root, nodeNew);
+			sortNode(root, child);
 			
 		}
 	}
@@ -44,44 +50,47 @@ public class Tree<K,V> {
 		return root;
 	}
 	
-	public void setRoot(Node wert){
+	
+	
+	public void clearTree(){
 		
-		root=wert;
+		root=null;
+		countNodes = 0;
 	}
 		
 	/**
 	 * sortiert den neuen Knoten an die richtige Stelle im binären Baum ein
-	 * @param nodeEnd
-	 * @param nodeNew
+	 * @param parent
+	 * @param child
 	 */
-	private void sortNode(Node nodeEnd, Node nodeNew){
+	private void sortNode(Node parent, Node child){
 		
 		//überprüft den Hashwert des neuen Knoten und fügt ihn entsprechend links oder rechts ein
 		
 		//linker Kindknoten
-		if(nodeEnd.hashCode() > nodeNew.hashCode()){
+		if(parent.hashCode() > child.hashCode()){
 			
 			//überprüft, ob der Kindknoten leer ist und fügt den neuen Knoten an dieser Stelle hinzu
-			if(nodeEnd.getLeft() == null){
+			if(parent.getLeft() == null){
 			
-				nodeEnd.setLeft(nodeNew);
+				parent.setLeft(child);
 				
 			}else{
 				//Kindknoten war nicht leer, also werden die Kindknoten des aktuellen Kindknoten überprüft
-				sortNode(nodeEnd.getLeft(),nodeNew);
+				sortNode(parent.getLeft(),child);
 			}
 			
 		//rechter Kindknoten	
 		}else{
 			
 			
-			if(nodeEnd.getRight() == null){
+			if(parent.getRight() == null){
 			
-				nodeEnd.setRight(nodeNew);
+				parent.setRight(child);
 				
 			}else{
 			
-				sortNode(nodeEnd.getRight(), nodeNew);
+				sortNode(parent.getRight(), child);
 				
 			}
 			
@@ -89,9 +98,6 @@ public class Tree<K,V> {
 		}
 	
 	}
-	
-	
-	
 	
 	
 	
@@ -108,15 +114,16 @@ public class Tree<K,V> {
 			
 			this.key = key;
 			this.value = value;
+			this.left = null;
+			this.right = null;
 			
 		}
-
 		
 		public Node getLeft() {
 			return left;
 		}
 
-		public void setLeft(Node left) {
+		private void setLeft(Node left) {
 			this.left = left;
 		}
 
@@ -124,18 +131,27 @@ public class Tree<K,V> {
 			return right;
 		}
 
-		public void setRight(Node right) {
+		private void setRight(Node right) {
 			this.right = right;
 		}
 
+		public void setValue(V value){
+			
+			this.value = value;
+		}
 		
 		@Override
 		public int hashCode() {
-		
-			return super.hashCode();
-		
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((key == null) ? 0 : key.hashCode());
+			result = prime * result
+			+ ((left == null) ? 0 : left.hashCode());
+			result = prime * result
+			+ ((right == null) ? 0 : right.hashCode());
+			result = prime * result + ((value == null) ? 0 : value.hashCode());
+			return result;
 		}
-		
 		
 	
 		public V getValue(){

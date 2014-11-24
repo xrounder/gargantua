@@ -9,18 +9,18 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
  * @author 1414163 Miguel Caballero, 1410116 Dennis Czogalla
  *
  */
-public interface IAssociativeArray {
+public interface IAssociativeArray<K, V> {
 
 	public void clear ();
-	public boolean containsValue ();
-	public boolean containsKey ();
-	public int get (String key);
+	public boolean containsValue (V value);
+	public boolean containsKey (K key);
+	public V get (K key);
 	public boolean isEmpty ();
-	public void put (String key, int value);
+	public void put (K key, V value);
 	public void putAll ();
-	public int remove (String key);
+	public int remove (K key);
 	public int size ();
-	public void update (String key, int value);
+	public void update (K key, V value);
 	public void forEach ();
 	public void extractAll();
 	public void map ();
