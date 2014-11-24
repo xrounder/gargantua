@@ -24,10 +24,18 @@ public class Tree<K,V> {
 		countNodes = 0;
 	}
 	
-	public int getcountNodes(){
+
+	
+	public int getCountNodes(){
 		
 		return countNodes;
 	}
+	
+	public void setCountNodes(int number){
+		countNodes = number;
+	}
+	
+	
 	/**
 	 * neuer Knoten wird hinzugefügt
 	 * @param nodeNew

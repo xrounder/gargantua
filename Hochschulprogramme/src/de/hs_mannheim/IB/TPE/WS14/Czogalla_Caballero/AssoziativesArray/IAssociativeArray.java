@@ -22,6 +22,6 @@ public interface IAssociativeArray<K, V> {
 	public int size ();
 	public void update (K key, V value);
 	public void forEach ();
-	public void extractAll();
+	public void extractAll(AssociativeArray<K,V> newArray);
 	public void map ();
 }

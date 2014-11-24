@@ -12,10 +12,7 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
 public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 
 	
-	Tree<K,V> tree;
-	private boolean foundKey;
-	private boolean foundValue;
-	//private String saveData;
+	private Tree<K,V> tree;
 	
 	public AssociativeArray(){
 		
@@ -31,10 +28,12 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 	}
 	
+	public Tree<K,V> getTree(){
+		
+		return tree;
+	}
 	
 	
-	
-
 	//fertig
 	private boolean searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
 		
@@ -273,6 +272,7 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 			putAllRecursive(tempTree.getRoot().getRight());
 			
 		}
+		tree.setCountNodes(tree.getCountNodes()-1)
 		return value;
 	}
 	
@@ -280,7 +280,7 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 	@Override
 	public int size (){
 		
-		return tree.getcountNodes();
+		return tree.getCountNodes();
 	}
 	//fertig
 	@Override
@@ -292,10 +292,14 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 	public void forEach (){
 		
 	}
+	
 	@Override
-	public void extractAll(){
+	public void extractAll(AssociativeArray<K,V> newArray){
+		
+		newArray.putAll(this);
 		
 	}
+	
 	@Override
 	public void map (){
 		
