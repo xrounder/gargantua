@@ -12,35 +12,31 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
 public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 
 	
-	Tree<K,V> baum;
+	Tree<K,V> tree;
 	private boolean foundKey;
 	private boolean foundValue;
-	private K key;
-	private V value;
-	private String saveData;
+	//private String saveData;
 	
 	public AssociativeArray(){
 		
-		this.baum = new Tree<K,V>();
-		this.foundKey = false;
-		this.foundValue = false;
-		this.saveData = "";
+		this.tree = new Tree<K,V>();
+		
 	}
 	
 	//fertig
 	@Override
 	public void clear (){
 		
-		baum.clearTree();
+		tree.clearTree();
 		
 	}
 	
 	
 	
 	
-	
-	
-	public boolean searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
+
+	//fertig
+	private boolean searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
 		
 		boolean found;
 		
@@ -68,76 +64,94 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		return found;
 	}
 	
-	
-	
-	
-	
+	private Tree<K,V>.Node getNodeByKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
+		
+		boolean found =false;
+		Tree<K,V>.Node foundNode = null;
+		
+		if(parent.getKey().equals(key)){
+			
+			foundNode = parent;
+			return foundNode;
+		
+		}else{
+			
+			foundNode = null;
+			if(leftChild != null){
+				
+				foundNode = getNodeByKey(leftChild, leftChild.getLeft(), leftChild.getRight(), key);
+					
+			}
+				
+			if(rightChild != null && foundNode.equals(null)){
+					
+				foundNode = getNodeByKey(rightChild, rightChild.getLeft(), rightChild.getRight(), key);
+					
+			}
+			
+			
+		}
+		
+		return foundNode;
+	}
 	
 	//fertig
-	/*private void searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
+	private boolean searchKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
 		
-		
-		if(parent.getValue().equals(value)){
-			
-			foundValue = true;
-	
-		}
-		
-		if(leftChild != null){
-			
-			searchValue(leftChild, leftChild.getLeft(), leftChild.getRight(), value);
-			
-		}
-		
-		if(rightChild != null){
-			
-			searchValue(rightChild, rightChild.getLeft(), rightChild.getRight(), value);
-		}
-		
-		
-		
-	}*/
-	//fertig
-	private void searchKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
+		boolean found;
 		
 		if(parent.getKey().equals(key)){
 		
-			foundKey = true;
+			found = true;
 		
-		}
+		}else{
 			
-		if(leftChild != null){
+			found = false;
 			
-			searchKey(leftChild, leftChild.getLeft(), leftChild.getRight(), key);
+			if(leftChild != null){
 				
-		}
+				found = searchKey(leftChild, leftChild.getLeft(), leftChild.getRight(), key);
+					
+			}
+				
+			if(rightChild != null && !found){
+					
+				found = searchKey(rightChild, rightChild.getLeft(), rightChild.getRight(), key);
+					
+			}
 			
-		if(rightChild != null){
-				
-			searchKey(rightChild, rightChild.getLeft(), rightChild.getRight(), key);
-				
 		}
+		
+		return found;
 		
 	}
 	//fertig
-	private void getValueByKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
+	private V getValueByKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
+		
+		V value;
 		
 		if(parent.getKey().equals(key)){
-			System.out.println("GEFUNDEN");
-			this.value = parent.getValue();
-		}
 			
-		if(leftChild != null){
+			value = parent.getValue();
 			
-			getValueByKey(leftChild, leftChild.getLeft(), leftChild.getRight(), key);
-				
-		}
+		}else{
 			
-		if(rightChild != null){
+			value = null;
+			
+			if(leftChild != null){
 				
-			getValueByKey(rightChild, rightChild.getLeft(), rightChild.getRight(), key);
+				getValueByKey(leftChild, leftChild.getLeft(), leftChild.getRight(), key);
+					
+			}
 				
+			if(rightChild != null && value == null){
+					
+				getValueByKey(rightChild, rightChild.getLeft(), rightChild.getRight(), key);
+					
+			}
 		}
+		
+		return value;
 	}
 	//fertig
 	private void updateNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, K key, V value){
@@ -161,90 +175,53 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 	}
 	//fertig
-	private void nodeToString(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild){
+	private String nodeToString(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild){
+		
+		String saveData = "";
 		
 		saveData += "{KEY="+parent.getKey()+", VALUE="+parent.getValue()+"}\n";
 		
 		if(leftChild != null){
 			
-			nodeToString(leftChild, leftChild.getLeft(), leftChild.getRight());
+			saveData += nodeToString(leftChild, leftChild.getLeft(), leftChild.getRight());
 				
 		}
 			
 		if(rightChild != null){
 				
-			nodeToString(rightChild, rightChild.getLeft(), rightChild.getRight());
+			saveData += nodeToString(rightChild, rightChild.getLeft(), rightChild.getRight());
 				
 		}
 		
+		return saveData;
 		
 	}
 	
-	/*
-	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild){
-		
-		Node node = null;
-		
-		if(leftChild != null){
-			
-			searchNode(leftChild, leftChild.getLeft(), leftChild.getRight());
-			continue;	
-		}
-			
-		if(rightChild != null){
-				
-			searchNode(rightChild, rightChild.getLeft(), rightChild.getRight());
-				
-		}
-		
-		
-		return node;
-	}
-	
-	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, K key){
-			
-			
-		}
-	
-	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, K key, V value){
-		
-		
-	}
-	
-	
-	private void removeNode()
-	*/
+
 	//fertig
 	@Override
 	public boolean containsValue (V value){
 		
-		foundValue = false;
-		searchValue(baum.getRoot(), baum.getRoot().getLeft(),baum.getRoot().getRight(),value);
-		return foundValue;
+		return searchValue(tree.getRoot(), tree.getRoot().getLeft(),tree.getRoot().getRight(),value);
 		
 	}
 	//fertig
 	@Override
 	public boolean containsKey(K key){
 		
-		foundKey = false;
-		searchKey(baum.getRoot(), baum.getRoot().getLeft(),baum.getRoot().getRight(),key);
-		return foundKey;
+		return searchKey(tree.getRoot(), tree.getRoot().getLeft(),tree.getRoot().getRight(),key);
 	}
 	//fertig
 	@Override
 	public V get (K key){
 		
-		//this.value = null;
-		getValueByKey(baum.getRoot(), baum.getRoot().getLeft(),baum.getRoot().getRight(),key);
-		
-		return this.value;
+		return getValueByKey(tree.getRoot(), tree.getRoot().getLeft(),tree.getRoot().getRight(),key);
 	}
 	//fertig
 	@Override
 	public boolean isEmpty (){
 		
-		if(baum.getRoot() == null){
+		if(tree.getRoot() == null){
 			
 			return true;
 		}else{
@@ -257,19 +234,45 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 	@Override
 	public void put (K key, V value){
 		
-		baum.addNode(key, value);
+		tree.addNode(key, value);
 		
 	}
 	
+	private void putAllRecursive(Tree<K,V>.Node parent){
 	
+		if(parent==null){
+			
+		}else if(parent.getLeft()==null){
+			put(parent.getRight().getKey(), parent.getRight().getValue());
+			putAllRecursive(parent.getRight());
+		
+		}else if(parent.getRight()==null){
+			put(parent.getLeft().getKey(), parent.getLeft().getValue());	
+			putAllRecursive(parent.getLeft());
+		}
+	}
 	
 	@Override
-	public void putAll (){
+	public void putAll (AssociativeArray<K,V> newArray){
 		
+		Tree<K,V>.Node root = newArray.tree.getRoot();
+		
+		putAllRecursive(root);
 	}
+	
 	@Override
 	public V remove (K key){
 		
+		V value = null;
+		Tree<K,V> tempTree = new Tree<>();
+		
+		if (containsKey(key)){
+			value = get(key);
+			tempTree.setRoot( getNodeByKey(tree.getRoot(), tree.getRoot().getLeft(), tree.getRoot().getRight(), key) );
+			putAllRecursive(tempTree.getRoot().getLeft());
+			putAllRecursive(tempTree.getRoot().getRight());
+			
+		}
 		return value;
 	}
 	
@@ -277,13 +280,13 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 	@Override
 	public int size (){
 		
-		return baum.getcountNodes();
+		return tree.getcountNodes();
 	}
 	//fertig
 	@Override
 	public void update (K key, V value){
 		
-		updateNode(baum.getRoot(), baum.getRoot().getLeft(), baum.getRoot().getRight(),key, value);
+		updateNode(tree.getRoot(), tree.getRoot().getLeft(), tree.getRoot().getRight(),key, value);
 	}
 	@Override
 	public void forEach (){
@@ -297,14 +300,54 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 	public void map (){
 		
 	}
+	
+	
+	
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((tree == null) ? 0 : tree.hashCode());
+	result = prime * result + (foundKey ? 1231 : 1237);
+	result = prime * result + (foundValue ? 1231 : 1237);
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj) {
+		return true;
+	}
+	if (obj == null) {
+		return false;
+	}
+	if (getClass() != obj.getClass()) {
+		return false;
+	}
+	AssociativeArray other = (AssociativeArray) obj;
+	if (tree == null) {
+		if (other.tree != null) {
+			return false;
+		}
+	} else if (!tree.equals(other.tree)) {
+		return false;
+	}
+	if (foundKey != other.foundKey) {
+		return false;
+	}
+	if (foundValue != other.foundValue) {
+		return false;
+	}
+	return true;
+}
+
+
+	
 	//fertig
 	@Override
 	public String toString() {
 	
-		saveData = "";
-		nodeToString(baum.getRoot(), baum.getRoot().getLeft(), baum.getRoot().getRight());
-		
-		return saveData;
+		return nodeToString(tree.getRoot(), tree.getRoot().getLeft(), tree.getRoot().getRight());
 	}
 
 	

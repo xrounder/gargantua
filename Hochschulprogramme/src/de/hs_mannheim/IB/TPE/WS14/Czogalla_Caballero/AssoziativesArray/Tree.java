@@ -14,6 +14,10 @@ public class Tree<K,V> {
 	private Node root;
 	private int countNodes;
 	
+	public void setRoot(Node newRoot){
+		this.root=newRoot;
+	}
+	
 	public Tree(){
 		
 		root = null;
@@ -141,14 +145,59 @@ public class Tree<K,V> {
 		}
 		
 		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			Node other = (Node) obj;
+			if (!getOuterType().equals(other.getOuterType())) {
+				return false;
+			}
+			if (key == null) {
+				if (other.key != null) {
+					return false;
+				}
+			} else if (!key.equals(other.key)) {
+				return false;
+			}
+			if (left == null) {
+				if (other.left != null) {
+					return false;
+				}
+			} else if (!left.equals(other.left)) {
+				return false;
+			}
+			if (right == null) {
+				if (other.right != null) {
+					return false;
+				}
+			} else if (!right.equals(other.right)) {
+				return false;
+			}
+			if (value == null) {
+				if (other.value != null) {
+					return false;
+				}
+			} else if (!value.equals(other.value)) {
+				return false;
+			}
+			return true;
+		}
+
+		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
+			result = prime * result + getOuterType().hashCode();
 			result = prime * result + ((key == null) ? 0 : key.hashCode());
-			result = prime * result
-			+ ((left == null) ? 0 : left.hashCode());
-			result = prime * result
-			+ ((right == null) ? 0 : right.hashCode());
+			result = prime * result + ((left == null) ? 0 : left.hashCode());
+			result = prime * result + ((right == null) ? 0 : right.hashCode());
 			result = prime * result + ((value == null) ? 0 : value.hashCode());
 			return result;
 		}
@@ -162,6 +211,10 @@ public class Tree<K,V> {
 		public K getKey(){
 			
 			return key;
+		}
+
+		private Tree getOuterType() {
+			return Tree.this;
 		}
 		
 	}
