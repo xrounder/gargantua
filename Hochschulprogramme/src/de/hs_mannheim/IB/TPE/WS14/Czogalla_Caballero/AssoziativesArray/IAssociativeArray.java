@@ -18,7 +18,7 @@ public interface IAssociativeArray<K, V> {
 	public boolean isEmpty ();
 	public void put (K key, V value);
 	public void putAll ();
-	public int remove (K key);
+	public V remove (K key);
 	public int size ();
 	public void update (K key, V value);
 	public void forEach ();

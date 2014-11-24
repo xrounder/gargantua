@@ -35,8 +35,46 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 	}
 	
+	
+	
+	
+	
+	
+	public boolean searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
+		
+		boolean found;
+		
+		if(parent.getValue().equals(value)){
+			
+			found = true;
+		
+		}else{
+			
+			found = false;
+	 		
+			if(leftChild != null){
+			
+				found = searchValue(leftChild, leftChild.getLeft(), leftChild.getRight(), value);
+				
+			}
+			
+			if(rightChild != null && !found){
+				
+				found = searchValue(rightChild, rightChild.getLeft(), rightChild.getRight(), value);
+			}
+		
+		}
+		
+		return found;
+	}
+	
+	
+	
+	
+	
+	
 	//fertig
-	private void searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
+	/*private void searchValue(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, V value){
 		
 		
 		if(parent.getValue().equals(value)){
@@ -58,7 +96,7 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 		
 		
-	}
+	}*/
 	//fertig
 	private void searchKey(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild,  K key){
 		
@@ -142,6 +180,40 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 	}
 	
+	/*
+	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild){
+		
+		Node node = null;
+		
+		if(leftChild != null){
+			
+			searchNode(leftChild, leftChild.getLeft(), leftChild.getRight());
+			continue;	
+		}
+			
+		if(rightChild != null){
+				
+			searchNode(rightChild, rightChild.getLeft(), rightChild.getRight());
+				
+		}
+		
+		
+		return node;
+	}
+	
+	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, K key){
+			
+			
+		}
+	
+	private Node searchNode(Tree<K,V>.Node parent, Tree<K,V>.Node leftChild, Tree<K,V>.Node rightChild, K key, V value){
+		
+		
+	}
+	
+	
+	private void removeNode()
+	*/
 	//fertig
 	@Override
 	public boolean containsValue (V value){
@@ -196,9 +268,9 @@ public class AssociativeArray<K,V> implements IAssociativeArray<K,V> {
 		
 	}
 	@Override
-	public int remove (K key){
+	public V remove (K key){
 		
-		return 0;
+		return value;
 	}
 	
 	//fertig
