@@ -364,61 +364,6 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 		}
 
 	}
-
-	
-	private V removeBIATCH(K key, Tree<K,V>.Node parent, Tree<K,V>.Node child){
-		
-		V value = null;
-		
-		if(parent != null){
-			
-			/*if(parent.equals(child)){
-				
-				//child = parent.getLeft();
-				
-				
-			}*/
-			if(child.getKey().equals(key) && !child.equals(parent)){
-				
-				value = child.getValue();
-				parent.setLeft(child.getLeft());
-				parent.setRight(child.getRight());
-				child = null;
-				
-			}else{
-				
-				if(child.getLeft() != null){
-					
-					value = removeBIATCH(key, parent, child.getLeft());
-				}
-				
-				if(child.getRight() != null && value == null){
-					
-					removeBIATCH(key,parent, child.getRight());
-				}
-				
-			}
-			
-			
-			
-		
-		
-		}
-		
-		return value;
-		
-	}
-	
-	
-	public V removeB(K key){
-		
-		V value = null;
-		
-		
-		value = removeBIATCH(key, tree.getRoot(), tree.getRoot());
-		
-		return value;
-	}
 	
 	/*
 	 * (non-Javadoc)
@@ -435,6 +380,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 
 		putAllRecursive(root);
 	}
+	
 	/**
 	 * @summary rekursiv durhclaufen um zu löschen
 	 * 
@@ -443,10 +389,9 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	 * @return
 	 * @returnType V
 	 */
-	public V removeRecursive(Tree<K,V>.Node parent, K key) {
+	public V removeRecursive(ArrayList<Tree<K,V>.Node> savedNodes, Tree<K,V>.Node parent, K key) {
 
 		V value = null;
-		ArrayList<Tree<K,V>.Node> savedNodes = null;
 		
 		if (parent != null){
 			
@@ -457,14 +402,15 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 			}
 				
 			if (parent.getRight() != null) {
-				removeRecursive(parent.getRight(), key);
+				removeRecursive(savedNodes, parent.getRight(), key);
 			}
 			if (parent.getLeft() != null) {
-				removeRecursive(parent.getLeft(), key);
+				removeRecursive(savedNodes, parent.getLeft(), key);
 				
 			}
 
 		}
+		
 		return value;
 
 	}	
@@ -477,70 +423,18 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	@Override
 	public V remove(K key) {
 		V value = null;
-		value = removeRecursive(getTree().getRoot(), key);
-		return value;
+		ArrayList<Tree<K,V>.Node> savedNodes = new ArrayList<>();
 		
-//		V value = null;
-//		AssociativeArray<K,V> tempArray = new AssociativeArray<>();
-//	
-//		if (getTree().getRoot()!=null && containsKey(key)) {
-//			value = this.get(key);
-//			if( !getTree().getRoot().getKey().equals(key) ){
-//			
-//				Tree<K,V>.Node previousNode = getPreviousNodeByKey(tree.getRoot(), key);
-//			
-//				if(previousNode != null){
-//					if (previousNode.getLeft() != null && previousNode.getLeft().getKey().equals(key)) {
-//						previousNode.setLeft(previousNode.getLeft());
-//						tempArray.tree.setRoot(previousNode.getLeft().getLeft());
-//						tempArray.putAllRecursive(previousNode.getLeft().getRight());
-//					
-//					}else if (previousNode.getRight() != null && previousNode.getRight().getKey().equals(key)){
-//						previousNode.setRight(previousNode.getRight());
-//						tempArray.tree.setRoot(previousNode.getRight().getLeft());
-//						tempArray.putAllRecursive(previousNode.getRight().getRight());
-//					}
-//				}	
-//			}else{
-//				
-//			}
-//			putAll(tempArray);
-//
-//		}
-//		tree.setCountNodes(tree.getCountNodes() - 1);
-//		return value;
-	}
-
-	/**
-	 * @summary durchläuft den Baum anhand des übergebenen Keys rekursiv und
-	 *          gibt den Knoten zurück
-	 * 
-	 * @param parent
-	 * @param key
-	 * @return foundNode
-	 * @returnType Tree<K,V>.Node
-	 */
-	private Tree<K, V>.Node getPreviousNodeByKey(Tree<K, V>.Node parent, K key) {
-
-		Tree<K, V>.Node foundNode = null;
-
-		if (parent!=null){
-			if (parent.getLeft()!=null && parent.getLeft().getKey().equals(key)) {
-				foundNode = parent;
-				return foundNode;
-			}else if (parent.getLeft()!=null &&  parent.getRight().getKey().equals(key)){
-				foundNode = parent;
-				return foundNode;
-			}else {
-				if (parent.getLeft() != null) {
-					foundNode = getPreviousNodeByKey(parent.getLeft(), key);
-				}
-				if (parent.getRight() != null && foundNode != null) {
-					foundNode = getPreviousNodeByKey(parent.getRight(), key);
-				}
-			}
+		value = removeRecursive(savedNodes, getTree().getRoot(), key);
+		
+		clear();
+		
+		for(Tree<K, V>.Node savedNode : savedNodes){
+			getTree().addNode(savedNode.getKey(),savedNode.getValue());
 		}
-		return foundNode;
+		
+		return value;		
+
 	}
 	
 	/*
