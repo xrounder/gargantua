@@ -49,10 +49,11 @@ public class DictionaryTest {
 			testKeys[i] = "Test"+i;
 			testValues[i] = (i+10)+"";
 		}
+	
 		
 		assertArrayEquals(testKeys, dictTest.keys());
 		assertArrayEquals(testValues, dictTest.values());
-		
+	
 		
 	}
 	

@@ -42,17 +42,20 @@ public class Dictionary<K, V> extends AssociativeArray<String, String> {
 	private String[] fillWithKeys(String[] keys,
 			Tree<String, String>.Node parent, int keyIndex) {
 
-		if (parent == null && keyIndex >= keys.length) {
-			
-		} else if (parent.getLeft() != null && keyIndex < keys.length) {
+		if (parent != null && keyIndex < keys.length) {
+					
+			if (parent.getLeft() != null) {
 
-			keys[keyIndex] = parent.getLeft().getKey().toString();
-			fillWithKeys(keys, parent.getLeft(), keyIndex++);
+				keys[keyIndex] = parent.getLeft().getKey().toString();
+				fillWithKeys(keys, parent.getLeft(), keyIndex);
+				keyIndex++;
+			} 
+			if (parent.getRight() != null) {
 
-		} else if (parent.getRight() != null && keyIndex < keys.length) {
-
-			keys[keyIndex] = parent.getRight().getKey().toString();
-			fillWithKeys(keys, parent.getRight(), keyIndex++);
+				keys[keyIndex] = parent.getRight().getKey().toString();
+				fillWithKeys(keys, parent.getRight(), keyIndex);
+				keyIndex++;
+			}
 		}
 		return keys;
 	}
