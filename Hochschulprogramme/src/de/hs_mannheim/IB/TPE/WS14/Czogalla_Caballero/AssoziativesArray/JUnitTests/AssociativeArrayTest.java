@@ -4,10 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.function.BiConsumer;
+
 import org.junit.Test;
 
 import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.AssociativeArray;
-
+/**
+ * @summary JUnit-TEst von AssociativeArray<K,V>
+ * 
+ * @author 1414163 Miguel Caballero, 1410116 Dennis Czogalla
+ * @created 20.11.2014
+ */
 public class AssociativeArrayTest {
 
 	
@@ -155,6 +162,8 @@ public class AssociativeArrayTest {
 		testArray.remove(5);
 		
 		assertFalse("Value noch vorhanden!",testArray.containsValue("Test5"));
+		assertTrue("Value nicht mehr vorhanden!",testArray.containsValue("Test6"));
+		
 		
 		assertTrue("Value nicht mehr vorhanden!",testArray.containsValue("Test9"));
 		assertTrue("Value nicht mehr vorhanden!",testArray.containsValue("Test8"));
@@ -184,6 +193,77 @@ public class AssociativeArrayTest {
 		
 		
 	}
+	
+	@Test
+	public void putAll(){
+		
+		AssociativeArray<Integer, String> testArray =  new AssociativeArray<>();
+		AssociativeArray<Integer, String> newArray =  new AssociativeArray<>();
+		
+		for(int i = 0; i < 10; i++){
+			
+			testArray.put(i, "Test"+i);
+			newArray.put(i+10, "Test"+(i+10));
+			
+		}
+		
+		testArray.putAll(newArray);
+		
+		assertTrue("Key nicht vorhanden",testArray.containsKey(15));
+		assertTrue("Key nicht vorhanden",testArray.containsKey(10));
+		assertTrue("Key nicht vorhanden",testArray.containsKey(13));
+		
+		assertTrue("Value nicht vorhanden",testArray.containsValue("Test16"));
+		assertTrue("Value nicht vorhanden",testArray.containsValue("Test18"));
+		assertTrue("Value nicht vorhanden",testArray.containsValue("Test12"));
+		
+		
+	}
+	
+	@Test
+	public void biConsumer(){
+		/*
+		AssociativeArray<String, Integer> testArray =  new AssociativeArray<>();
+		
+		for(int i = 0; i < 10; i++){
+			
+			testArray.put("Test"+i, i);
+			
+		}
+		
+		BiConsumer<String, Integer> plus5 = (key, value) -> {testArray.update(key, value+5);};
+		
+		testArray.forEach(plus5);
+		
+		assertTrue(testArray.get("Test0").equals(5));
+		assertTrue(testArray.get("Test1").equals(6));
+		assertTrue(testArray.get("Test5").equals(10));*/
+	}
+	
+	@Test
+	public void extractAll(){
+		
+		AssociativeArray<String, Integer> testArray =  new AssociativeArray<>();
+		AssociativeArray<String, Integer> newArray =  new AssociativeArray<>();
+		
+		
+		for(int i = 0; i < 10; i++){
+			
+			testArray.put("Test"+i, i);
+			newArray.put("Test"+(i+10), i+10);
+		}
+		
+		testArray.extractAll(newArray);
+		
+		assertTrue(newArray.containsKey("Test1"));
+		assertTrue(newArray.containsKey("Test5"));
+		assertTrue(newArray.containsKey("Test9"));
+
+		assertTrue(newArray.containsValue(2));		
+		assertTrue(newArray.containsValue(6));
+		assertTrue(newArray.containsValue(7));
+	}
+	
 
 	
 }

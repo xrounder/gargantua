@@ -18,15 +18,6 @@ public class Tree<K, V> {
 	private int countNodes;
 
 	/**
-	 * setzt root
-	 * 
-	 * @param newRoot
-	 */
-	public void setRoot(Node newRoot) {
-		this.root = newRoot;
-	}
-
-	/**
 	 * Konstruktor
 	 * 
 	 */
@@ -34,6 +25,26 @@ public class Tree<K, V> {
 
 		root = null;
 		countNodes = 0;
+	}
+	
+	/**
+	 * @summary gibt root zurück
+	 * 
+	 * @return root
+	 * @returnType Node
+	 */
+	public Node getRoot() {
+
+		return root;
+	}
+
+	/**
+	 * setzt root
+	 * 
+	 * @param newRoot
+	 */
+	public void setRoot(Node newRoot) {
+		this.root = newRoot;
 	}
 
 	/**
@@ -77,20 +88,6 @@ public class Tree<K, V> {
 		}
 	}
 	
-	
-	
-
-	/**
-	 * @summary gibt root zurück
-	 * 
-	 * @return root
-	 * @returnType Node
-	 */
-	public Node getRoot() {
-
-		return root;
-	}
-
 	/**
 	 * @summary löscht dem Baum
 	 * 
@@ -160,6 +157,7 @@ public class Tree<K, V> {
 		private K key;
 		private V value;
 
+		private Node parent;
 		private Node left;
 		private Node right;
 
@@ -173,9 +171,25 @@ public class Tree<K, V> {
 
 			this.key = key;
 			this.value = value;
+			this.parent = null;
 			this.left = null;
 			this.right = null;
 
+		}
+
+		/**@summary gibt parent zurück
+		 * @return parent
+		 */
+		public Node getParent() {
+			return parent;
+		}
+
+		/**@summary parent wird gesetzt
+		 * @param parent
+		 * @return parent
+		 */
+		public void setParent(Node parent) {
+			this.parent = parent;
 		}
 
 		/**
@@ -219,6 +233,17 @@ public class Tree<K, V> {
 		}
 
 		/**
+		 * @summary gibt value zurück
+		 * 
+		 * @return value
+		 * @returnType V
+		 */
+		public V getValue() {
+
+			return value;
+		}
+		
+		/**
 		 * @summary setzt value
 		 * 
 		 * @param value
@@ -229,6 +254,28 @@ public class Tree<K, V> {
 			this.value = value;
 		}
 
+		/**
+		 * @summary gibt key zurück
+		 * 
+		 * @return key
+		 * @returnType K
+		 */
+		public K getKey() {
+
+			return key;
+		}
+
+		/**
+		 * @summary setzt key
+		 * 
+		 * 
+		 * @returnType void
+		 */
+		public void setKey(K key) {
+
+			this.key=key;
+		}
+		
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -298,28 +345,6 @@ public class Tree<K, V> {
 		}
 
 		/**
-		 * @summary gibt value zurück
-		 * 
-		 * @return value
-		 * @returnType V
-		 */
-		public V getValue() {
-
-			return value;
-		}
-
-		/**
-		 * @summary gibt key zurück
-		 * 
-		 * @return key
-		 * @returnType K
-		 */
-		public K getKey() {
-
-			return key;
-		}
-
-		/**
 		 * @summary
 		 * 
 		 * @return
@@ -329,6 +354,16 @@ public class Tree<K, V> {
 			return Tree.this;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "Node [key=" + key + ", value=" + value + "]";
+		}
+
+		
+		
 	}
 
 }

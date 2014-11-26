@@ -18,10 +18,8 @@ import java.util.function.BiFunction;
 public interface IAssociativeArray<K, V> {
 
 	/**
-	 * 
 	 * @summary soll das assoziative Array leeren
-	 * 
-	 * 
+	 *  
 	 */
 	public void clear();
 
@@ -137,5 +135,5 @@ public interface IAssociativeArray<K, V> {
 	 * 
 	 * 
 	 */
-	public <R> R map(BiFunction<K, V, R> biFunc);
+	public AssociativeArray<K,V> map(BiFunction<K, V, V> biFunc);
 }

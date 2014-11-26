@@ -3,11 +3,12 @@
  */
 package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
 
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 /**
- * Assoziatives Array, das intern einen Binärbaum verwendet
+ * Assoziatives Array, das intern einen BinÃ¤rbaum verwendet
  * 
  * @author 1414163 Miguel Caballero, 1410116 Dennis Czogalla
  * @created 20.11.2014
@@ -45,7 +46,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary gibt tree zurück
+	 * @summary gibt tree zurÃ¼ck
 	 * 
 	 *          Tree<K,V> @return tree
 	 */
@@ -55,7 +56,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary durchsucht den Baum rekursiv nach dem übergebenen Wert
+	 * @summary durchsucht den Baum rekursiv nach dem Ã¼bergebenen Wert
 	 * 
 	 * @param parent
 	 * @param value
@@ -90,49 +91,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary durchläuft den Baum anhand des übergebenen Keys rekursiv und
-	 *          gibt den Knoten zurück
-	 * 
-	 * @param parent
-	 * @param key
-	 * @return foundNode
-	 * @returnType Tree<K,V>.Node
-	 */
-	private Tree<K, V>.Node getNodeByKey(Tree<K, V>.Node parent, K key) {
-
-		Tree<K, V>.Node foundNode = null;
-
-		if (parent.getKey().equals(key)) {
-
-			foundNode = parent;
-			return foundNode;
-
-		} else {
-
-			foundNode = null;
-			if (parent.getLeft() != null) {
-
-				foundNode = getNodeByKey(parent.getLeft(), key);
-
-			}
-
-			if (parent.getRight() != null && foundNode == null) {
-
-				foundNode = getNodeByKey(parent.getRight(), key);
-
-			}
-			
-
-		}
-
-		return foundNode;
-	}
-
-	
-	
-
-	/**
-	 * @summary durchsucht den übergebenen Schlüssel rekursiv im Baum
+	 * @summary durchsucht den Ã¼bergebenen SchlÃ¼ssel rekursiv im Baum
 	 * 
 	 * @param parent
 	 * @param key
@@ -170,7 +129,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary findet anhand des übergebenen Schlüssels den dazugehörigen Wert
+	 * @summary findet anhand des Ã¼bergebenen SchlÃ¼ssels den dazugehÃ¶rigen Wert
 	 * 
 	 * @param parent
 	 * @param key
@@ -205,7 +164,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary ersetzt den Wert des übergebenen Schlüssel mit neuem übergebenen
+	 * @summary ersetzt den Wert des Ã¼bergebenen SchlÃ¼ssel mit neuem Ã¼bergebenen
 	 *          Wert
 	 * 
 	 * @param parent
@@ -271,6 +230,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 		return saveData;
 
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -358,15 +318,17 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	}
 
 	/**
-	 * @summary fügt alle Knoten des übergebenen Baumes dem Baum an
+	 * @summary fÃ¼gt alle Knoten des Ã¼bergebenen Baumes dem Baum an
 	 * 
 	 * @param parent
 	 * @returnType void
 	 */
-	private void putAllRecursive(Tree<K, V>.Node parent) {
-		
-		if (parent != null) {
-
+	public void putAllRecursive(Tree<K, V>.Node parent) {
+				
+		if (parent != null){
+			
+			put(parent.getKey(),parent.getValue());
+			
 			if (parent.getRight() != null) {
 				put(parent.getRight().getKey(), parent.getRight().getValue());
 				putAllRecursive(parent.getRight());
@@ -378,29 +340,86 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 		}
 	}
 
-	private void doBiConsumer(Tree<K, V>.Node parent,
-			Tree<K, V>.Node leftChild, Tree<K, V>.Node rightChild,
-			BiConsumer<K, V> biCon) {
-
-		// biCon.<?????WTF?_.|.,???>.getClass();
+	/**
+	 * 	@summary fÃ¼hrt den BiConsumer aus
+	 * 
+	 * @param parent
+	 * @param biCon
+	 * @returnType void
+	 */
+	private void doBiConsumer(Tree<K, V>.Node parent, BiConsumer<K, V> biCon) {
+		
 		biCon.accept(parent.getKey(), parent.getValue());
 
-		if (leftChild != null) {
+		if (parent.getLeft() != null) {
 
-			doBiConsumer(leftChild, leftChild.getLeft(), leftChild.getRight(),
-					biCon);
+			doBiConsumer(parent.getLeft(), biCon);
 
 		}
 
-		if (rightChild != null) {
+		if (parent.getRight() != null) {
 
-			doBiConsumer(rightChild, rightChild.getLeft(),
-					rightChild.getRight(), biCon);
+			doBiConsumer(parent.getRight(), biCon);
 
 		}
 
 	}
 
+	
+	private V removeBIATCH(K key, Tree<K,V>.Node parent, Tree<K,V>.Node child){
+		
+		V value = null;
+		
+		if(parent != null){
+			
+			/*if(parent.equals(child)){
+				
+				//child = parent.getLeft();
+				
+				
+			}*/
+			if(child.getKey().equals(key) && !child.equals(parent)){
+				
+				value = child.getValue();
+				parent.setLeft(child.getLeft());
+				parent.setRight(child.getRight());
+				child = null;
+				
+			}else{
+				
+				if(child.getLeft() != null){
+					
+					value = removeBIATCH(key, parent, child.getLeft());
+				}
+				
+				if(child.getRight() != null && value == null){
+					
+					removeBIATCH(key,parent, child.getRight());
+				}
+				
+			}
+			
+			
+			
+		
+		
+		}
+		
+		return value;
+		
+	}
+	
+	
+	public V removeB(K key){
+		
+		V value = null;
+		
+		
+		value = removeBIATCH(key, tree.getRoot(), tree.getRoot());
+		
+		return value;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -416,7 +435,39 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 
 		putAllRecursive(root);
 	}
+	/**
+	 * @summary rekursiv durhclaufen um zu lÃ¶schen
+	 * 
+	 * @param parent
+	 * @param key
+	 * @return
+	 * @returnType V
+	 */
+	public V removeRecursive(Tree<K,V>.Node parent, K key) {
 
+		V value = null;
+		ArrayList<Tree<K,V>.Node> savedNodes = null;
+		
+		if (parent != null){
+			
+			if(!(parent.getKey().equals(key))){
+				savedNodes.add(parent);
+			}else{
+				value = parent.getValue();
+			}
+				
+			if (parent.getRight() != null) {
+				removeRecursive(parent.getRight(), key);
+			}
+			if (parent.getLeft() != null) {
+				removeRecursive(parent.getLeft(), key);
+				
+			}
+
+		}
+		return value;
+
+	}	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -425,21 +476,73 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	 */
 	@Override
 	public V remove(K key) {
-
 		V value = null;
-		Tree<K, V> tempTree = new Tree<>();
-
-		if (containsKey(key)) {
-			value = this.get(key);
-			tempTree.setRoot(getNodeByKey(tree.getRoot(), key));
-			putAllRecursive(tempTree.getRoot().getLeft());
-			putAllRecursive(tempTree.getRoot().getRight());
-
-		}
-		tree.setCountNodes(tree.getCountNodes() - 1);
+		value = removeRecursive(getTree().getRoot(), key);
 		return value;
+		
+//		V value = null;
+//		AssociativeArray<K,V> tempArray = new AssociativeArray<>();
+//	
+//		if (getTree().getRoot()!=null && containsKey(key)) {
+//			value = this.get(key);
+//			if( !getTree().getRoot().getKey().equals(key) ){
+//			
+//				Tree<K,V>.Node previousNode = getPreviousNodeByKey(tree.getRoot(), key);
+//			
+//				if(previousNode != null){
+//					if (previousNode.getLeft() != null && previousNode.getLeft().getKey().equals(key)) {
+//						previousNode.setLeft(previousNode.getLeft());
+//						tempArray.tree.setRoot(previousNode.getLeft().getLeft());
+//						tempArray.putAllRecursive(previousNode.getLeft().getRight());
+//					
+//					}else if (previousNode.getRight() != null && previousNode.getRight().getKey().equals(key)){
+//						previousNode.setRight(previousNode.getRight());
+//						tempArray.tree.setRoot(previousNode.getRight().getLeft());
+//						tempArray.putAllRecursive(previousNode.getRight().getRight());
+//					}
+//				}	
+//			}else{
+//				
+//			}
+//			putAll(tempArray);
+//
+//		}
+//		tree.setCountNodes(tree.getCountNodes() - 1);
+//		return value;
 	}
 
+	/**
+	 * @summary durchlÃ¤uft den Baum anhand des Ã¼bergebenen Keys rekursiv und
+	 *          gibt den Knoten zurÃ¼ck
+	 * 
+	 * @param parent
+	 * @param key
+	 * @return foundNode
+	 * @returnType Tree<K,V>.Node
+	 */
+	private Tree<K, V>.Node getPreviousNodeByKey(Tree<K, V>.Node parent, K key) {
+
+		Tree<K, V>.Node foundNode = null;
+
+		if (parent!=null){
+			if (parent.getLeft()!=null && parent.getLeft().getKey().equals(key)) {
+				foundNode = parent;
+				return foundNode;
+			}else if (parent.getLeft()!=null &&  parent.getRight().getKey().equals(key)){
+				foundNode = parent;
+				return foundNode;
+			}else {
+				if (parent.getLeft() != null) {
+					foundNode = getPreviousNodeByKey(parent.getLeft(), key);
+				}
+				if (parent.getRight() != null && foundNode != null) {
+					foundNode = getPreviousNodeByKey(parent.getRight(), key);
+				}
+			}
+		}
+		return foundNode;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -478,8 +581,7 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	@Override
 	public void forEach(BiConsumer<K, V> biCon) {
 
-		doBiConsumer(tree.getRoot(), tree.getRoot().getLeft(), tree.getRoot()
-				.getRight(), biCon);
+		doBiConsumer(tree.getRoot(), biCon);
 
 	}
 
@@ -505,11 +607,23 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 	 * IAssociativeArray#map()
 	 */
 	@Override
-	public <R> R map(BiFunction<K, V, R> biFunc) {
-
-		R bla = null;
-
-		return bla;
+	public AssociativeArray<K,V> map(BiFunction<K, V, V> biFunc) {
+		
+		AssociativeArray<K,V> newArray = new AssociativeArray<>();
+		/*
+		if (!this.isEmpty()) {
+			
+			BiConsumer<K, V> biCon = (key, value) -> {
+			
+				value = biFunc.apply(key, value);
+				newArray.put(key, value);
+		
+			};
+			
+			this.forEach(biCon);
+		}*/
+		
+		return newArray;
 
 	}
 
