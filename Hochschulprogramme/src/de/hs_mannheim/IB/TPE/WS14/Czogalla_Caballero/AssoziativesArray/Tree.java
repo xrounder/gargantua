@@ -76,6 +76,9 @@ public class Tree<K, V> {
 
 		}
 	}
+	
+	
+	
 
 	/**
 	 * @summary gibt root zurück
@@ -191,7 +194,7 @@ public class Tree<K, V> {
 		 * @param left
 		 * @returnType void
 		 */
-		private void setLeft(Node left) {
+		void setLeft(Node left) {
 			this.left = left;
 		}
 
@@ -211,7 +214,7 @@ public class Tree<K, V> {
 		 * @param right
 		 * @returnType void
 		 */
-		private void setRight(Node right) {
+		void setRight(Node right) {
 			this.right = right;
 		}
 

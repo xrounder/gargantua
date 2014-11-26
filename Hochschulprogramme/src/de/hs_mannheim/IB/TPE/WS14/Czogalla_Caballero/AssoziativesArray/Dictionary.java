@@ -21,6 +21,7 @@ public class Dictionary<K, V> extends AssociativeArray<String, String> {
 	 * @returnType String[]
 	 */
 	public String[] keys() {
+	
 		String[] keys = new String[size()];
 		
 		keys[0] = getTree().getRoot().getKey();
@@ -42,6 +43,8 @@ public class Dictionary<K, V> extends AssociativeArray<String, String> {
 	private String[] fillWithKeys(String[] keys,
 			Tree<String, String>.Node parent, int keyIndex) {
 
+		
+		
 		if (parent != null && keyIndex < keys.length) {
 					
 			if (parent.getLeft() != null) {
@@ -59,6 +62,9 @@ public class Dictionary<K, V> extends AssociativeArray<String, String> {
 		}
 		return keys;
 	}
+	
+
+
 
 	/**
 	 * @summary soll ein Array, welches Werte enthält, zurückliefern

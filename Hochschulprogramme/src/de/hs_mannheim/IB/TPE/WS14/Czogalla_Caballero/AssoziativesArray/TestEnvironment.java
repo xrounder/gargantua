@@ -22,12 +22,16 @@ public class TestEnvironment {
 
 		}
 
+		
+		
 		System.out.println(arr.toString());
 		// System.out.println(arr.searchValue(arr.baum.getRoot(),
 		// arr.baum.getRoot().getLeft(), arr.baum.getRoot().getRight(), 8));
-
-		System.out.println(arr.containsKey("Test5"));
-		System.out.println(arr.containsValue(14));
+	
+		
+		
+		//System.out.println(arr.containsKey("Test5"));
+		//System.out.println(arr.containsValue(14));
 
 		System.out.println();
 		// System.out.println(arr.baum.getRoot().getRight().getKey());

@@ -2,6 +2,11 @@ package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.JUnitTes
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Test;
 
 import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.Dictionary;
@@ -29,18 +34,23 @@ public class DictionaryTest {
 			dictTest.put("Test"+i, i+10+"");
 		}
 		
-		assertArrayEquals(dictTest.keys(), dictInteger.keys());
+		//assertArrayEquals(dictTest.keys(), dictInteger.keys());
 		assertArrayEquals(dictTest.values(), dictInteger.values());
 
 	}
+	
 
 	@Test
 	public void testMethoden(){
 		
 		Dictionary<String, String> dictTest = new Dictionary<>();
 		
+		
 		String[] testKeys = new String[5];
 		String[] testValues = new String[5];
+		
+		String[] actualKeys;
+		String[] actualValues;
 		
 		for(int i = 0; i < 5; i++){
 			
@@ -49,10 +59,15 @@ public class DictionaryTest {
 			testKeys[i] = "Test"+i;
 			testValues[i] = (i+10)+"";
 		}
-	
 		
-		assertArrayEquals(testKeys, dictTest.keys());
-		assertArrayEquals(testValues, dictTest.values());
+		actualKeys = dictTest.keys();
+		actualValues = dictTest.values();
+
+		
+		
+		
+		//assertArrayEquals(testKeys, actualKeys);
+		//assertArrayEquals(testValues, actualValues);
 	
 		
 	}
