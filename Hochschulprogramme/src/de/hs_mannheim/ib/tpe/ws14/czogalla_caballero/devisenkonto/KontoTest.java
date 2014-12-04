@@ -1,4 +1,4 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.devisenkonto;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ import org.junit.Test;
  * 
  * JUnit-Test zur Klasse Konto
  * 
- * @see de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto.Konto
+ * @see de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.Devisenkonto.Konto
  * 
  * @author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  * 

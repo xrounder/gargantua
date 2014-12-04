@@ -1,9 +1,9 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.devisenkonto;
 
 /**
  * Dient als Übersicht bzw. Liste für verschiedene Währungen
  * 
- * @see de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto.Waehrung
+ * @see de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.Devisenkonto.Waehrung
  * 
  * @author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  * 

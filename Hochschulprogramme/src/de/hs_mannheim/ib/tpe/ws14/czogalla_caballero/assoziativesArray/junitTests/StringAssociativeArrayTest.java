@@ -1,10 +1,10 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.JUnitTests;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.junitTests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.StringAssociativeArray;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.StringAssociativeArray;
 /**
  * @summary JUnit-TEst von StringAssociativeArray<K,V>
  * 

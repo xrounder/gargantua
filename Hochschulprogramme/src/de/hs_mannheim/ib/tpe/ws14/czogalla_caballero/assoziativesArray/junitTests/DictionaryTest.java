@@ -1,4 +1,4 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.JUnitTests;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.junitTests;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.Dictionary;
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.Tree;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.Dictionary;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.Tree;
 
 /**
  * @summary JUnit-TEst von Dictionary<K,V>

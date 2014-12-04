@@ -1,10 +1,8 @@
 /**
  * 
  */
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
 /**
  * 

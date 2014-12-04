@@ -1,14 +1,12 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.JUnitTests;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.junitTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.function.BiConsumer;
-
 import org.junit.Test;
 
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.AssociativeArray;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.AssociativeArray;
 /**
  * @summary JUnit-TEst von AssociativeArray<K,V>
  * 

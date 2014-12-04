@@ -1,11 +1,9 @@
 /**
  * 
  */
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray;
 
 import java.util.ArrayList;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
 /**
  * Assoziatives Array, das intern einen Binärbaum verwendet
@@ -413,7 +411,8 @@ public class AssociativeArray<K, V> implements IAssociativeArray<K, V> {
 		
 		return value;
 
-	}	
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -1,10 +1,10 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.devisenkonto;
 
 /**
  * Objekttyp Konto; beinhaltet eine Waehrung, einen Inhaber, einen Kontostand
  * und eine Buchsnummer
  * 
- * @see de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto.Konto
+ * @see de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.Devisenkonto.Konto
  * 
  * @author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  * 

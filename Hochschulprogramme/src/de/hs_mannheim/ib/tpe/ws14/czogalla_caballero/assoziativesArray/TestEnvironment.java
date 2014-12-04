@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray;
 
 /**
  * @author 1414163 Miguel Caballero, 1410116 Dennis Czogalla

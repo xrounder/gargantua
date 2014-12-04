@@ -1,4 +1,4 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.Devisenkonto;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.devisenkonto;
 
 /**
  * Objekttyp Waehrung, welche aus einem Namen, einem Kürzel und einem Kurs zum

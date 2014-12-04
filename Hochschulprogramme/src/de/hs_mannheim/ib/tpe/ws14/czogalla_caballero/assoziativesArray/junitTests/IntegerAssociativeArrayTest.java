@@ -1,11 +1,11 @@
-package de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.JUnitTests;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.junitTests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.Dictionary;
-import de.hs_mannheim.IB.TPE.WS14.Czogalla_Caballero.AssoziativesArray.IntegerAssociativeArray;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.Dictionary;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray.IntegerAssociativeArray;
 
 public class IntegerAssociativeArrayTest {
 
