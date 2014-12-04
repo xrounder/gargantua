@@ -12,7 +12,7 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray;
  * @param <K>
  * @param <V>
  */
-public class Dictionary<K, V> extends AssociativeArray<String, String> {
+public class Dictionary<K,V> extends AssociativeArray<String, String> {
 
 	/**
 	 * @summary soll ein Array, welches alle Schlüssel enthält, zurückliefern
