@@ -5,6 +5,8 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst;
 
 import java.util.List;
 
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
+
 /**
  * @author 1414163
  *

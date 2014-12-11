@@ -1,4 +1,8 @@
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst;
+
 import java.util.List;
+
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
 /**
  * Grundlegendes Interface, um Verschlusselung durchzufuhren. Mit Hilfe dieses

@@ -7,6 +7,8 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.ex
  * @author 1414163
  *
  */
-public class CrypterException {
+public class CrypterException extends Throwable{
 
+	
+	
 }
