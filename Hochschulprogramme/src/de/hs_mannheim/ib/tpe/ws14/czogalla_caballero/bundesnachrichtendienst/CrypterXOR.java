@@ -13,6 +13,20 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
  */
 public class CrypterXOR implements Crypter{
 
+	private String key;
+	
+	public CrypterXOR(String key){
+		this.key = key;
+	}
+	
+	public String getKey(){
+		return this.key;
+	}
+	
+	public void setKey(String key){
+		this.key = key;
+	}
+	
 	@Override
 	public String encrypt(String message) throws CrypterException {
 		// TODO Auto-generated method stub

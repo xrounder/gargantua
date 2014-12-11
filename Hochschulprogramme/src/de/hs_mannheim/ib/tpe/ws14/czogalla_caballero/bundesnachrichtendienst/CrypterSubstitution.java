@@ -6,7 +6,7 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 
 public class CrypterSubstitution implements Crypter{
 
-	@Override
+	//@Override
 	public String encrypt(String message) throws CrypterException {
 		// TODO Auto-generated method stub
 		return null;
