@@ -4,6 +4,8 @@
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.assoziativesArray;
 
 import java.util.ArrayList;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * Assoziatives Array, das intern einen Binärbaum verwendet
