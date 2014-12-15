@@ -77,9 +77,9 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 			
 		for(int posMsg = 0; posMsg < cypherText.length(); posMsg++){
 			
-			cryption += letterPosition(cypherText.charAt(posMsg));
+			cryption -= letterPosition(cypherText.charAt(posMsg));
 			
-			if(cryption < 2){
+			if(cryption < cryptedPosition()){
 							
 				cryptedLetter = ALPHABET.charAt(Math.abs(cryption-25));
 							
@@ -124,7 +124,7 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 			
 			cryption += letterPosition(message.charAt(posMsg));
 			
-			if(cryption > 22){
+			if(cryption > cryptedPosition()){
 							
 				cryptedLetter = ALPHABET.charAt(Math.abs(cryption-25));
 							

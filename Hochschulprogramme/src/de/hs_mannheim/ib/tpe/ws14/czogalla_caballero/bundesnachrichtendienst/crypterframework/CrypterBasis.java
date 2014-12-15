@@ -19,9 +19,8 @@ public abstract class CrypterBasis {
 	
 	protected String removeChars(String text){
 		
-		text.trim();
-		text.toUpperCase();
-		
+		text = text.trim();
+		text = text.toUpperCase();
 		String removed = "";
 		
 		for(int pos = 0; pos < text.length(); pos++){

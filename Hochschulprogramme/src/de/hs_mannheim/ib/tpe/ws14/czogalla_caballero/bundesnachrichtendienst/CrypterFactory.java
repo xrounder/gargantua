@@ -19,8 +19,9 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
  */
 public class CrypterFactory {
 	
-	
-	public Crypter createCrypter(CryptionMethod option, String key) throws IllegalKeyException{
+
+
+	public static Crypter createCrypter(String key,CryptionMethod option) throws IllegalKeyException{
 		
 		
 		Crypter returnCrypter = null;
