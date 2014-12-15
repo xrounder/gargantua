@@ -6,14 +6,15 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.cr
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.Crypter;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CrypterBasis;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
 /**
  * @author 1414163
  *
  */
-public class CrypterXOR implements Crypter{
+public class CrypterXOR extends CrypterBasis implements Crypter{
 
 	private String key;
 	private final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@[\\]^_";
@@ -30,8 +31,10 @@ public class CrypterXOR implements Crypter{
 		this.key = key;
 	}
 	
-	@Override
-	public String encrypt(String message) throws CrypterException {
+	
+	private String xor(String message){
+		
+		message = removeChars(message);
 		
 		String crypted = "";
 		
@@ -69,6 +72,13 @@ public class CrypterXOR implements Crypter{
 		}
 		
 		return crypted;
+	}
+	
+	
+	@Override
+	public String encrypt(String message) throws CrypterException {
+		
+		return xor(message);
 	
 	}
 
@@ -89,32 +99,7 @@ public class CrypterXOR implements Crypter{
 	@Override
 	public String decrypt(String cypherText) throws CrypterException {
 		
-		String crypted = "";
-		
-		for(int pos = 0; pos < cypherText.length(); pos++){
-			
-			int keyValue = 0;
-			int textValue = 0;
-			
-			for(int posKey = 0; posKey < ALPHABET.length(); posKey++){
-			
-				if(cypherText.charAt(pos) == ALPHABET.charAt(posKey)){
-					
-					textValue = posKey;
-				}
-				
-				if(key.charAt(pos) == ALPHABET.charAt(posKey)){
-					
-					keyValue = posKey;
-				}
-					
-			}
-			
-			crypted += ALPHABET.charAt(keyValue ^ textValue);
-		}
-		
-
-		return crypted;
+		return xor(cypherText);
 	}
 
 	@Override

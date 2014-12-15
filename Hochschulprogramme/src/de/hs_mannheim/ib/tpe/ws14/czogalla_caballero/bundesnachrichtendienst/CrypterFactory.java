@@ -8,6 +8,9 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.cry
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterReverse;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterSubstitution;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterXOR;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CrypterBasis;
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CryptionMethod;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.IllegalKeyException;
 
 /**
@@ -17,16 +20,14 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 public class CrypterFactory {
 	
 	
-
-	
-	public Crypter createCrypter(CryptionMethod option, String text, String key) throws IllegalKeyException{
+	public Crypter createCrypter(CryptionMethod option, String key) throws IllegalKeyException{
+		
 		
 		Crypter returnCrypter = null;
 		
 		switch (option){
 			case CAESAR:
 				returnCrypter = new CrypterCaesar(key);
-				
 				break;
 			case SUBSTITUTION:
 				returnCrypter = new CrypterSubstitution(key);
