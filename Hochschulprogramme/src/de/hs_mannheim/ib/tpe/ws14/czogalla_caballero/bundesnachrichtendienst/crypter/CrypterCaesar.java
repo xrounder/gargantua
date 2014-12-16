@@ -65,32 +65,42 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 	public String decrypt(String cypherText) throws CrypterException {
 		
 		cypherText = removeChars(cypherText);
-		
-		char cryptedLetter;
 		String cryptedMessage = "";
-		//int cryption = cryptedPosition();
-		/*	
+		char cryptedLetter;	
+		
+		int cryptedPos = cryptedPosition();
+		
 		for(int posMsg = 0; posMsg < cypherText.length(); posMsg++){
-			
-			cryption -= letterPosition(cypherText.charAt(posMsg));
-			
-			if(cryption < cryptedPosition()){
-							
-				cryptedLetter = ALPHABET.charAt(Math.abs(cryption-25));
-							
-			}else{
+		
+			for(int letterPos = 0; letterPos < ALPHABET.length(); letterPos++){
 				
-				cryptedLetter = ALPHABET.charAt(cryption);
-		
+				if(cypherText.charAt(posMsg) == ALPHABET.charAt(letterPos)){
+					
+					if(letterPos-cryptedPos < cryptedPos){
+						
+						cryptedLetter = ALPHABET.charAt(ALPHABET.length()- Math.abs(letterPos-cryptedPos)-1);
+						
+					}else{
+						
+						cryptedLetter =  ALPHABET.charAt(letterPos-cryptedPos);
+						
+					}
+					
+					cryptedMessage += cryptedLetter;
+					
+				}
+				
 			}
+			
+			
+			
 						
-			cryptedMessage += cryptedLetter;
-						
-		}*/
-		
+		}
+			
 		return cryptedMessage;
 	}
 
+	
 	@Override
 	public List<String> decrypt(List<String> cypherTexte)
 			throws CrypterException {
@@ -115,22 +125,19 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 		
 		int cryptedPos = cryptedPosition();
 		
-		
-		
 		for(int posMsg = 0; posMsg < message.length(); posMsg++){
 		
 			for(int letterPos = 0; letterPos < ALPHABET.length(); letterPos++){
 				
 				if(message.charAt(posMsg) == ALPHABET.charAt(letterPos)){
 					
-					if(letterPos+cryptedPos > ALPHABET.length() - cryptedPos){
+					if(letterPos+cryptedPos > ALPHABET.length()-1){
 						
 						cryptedLetter = ALPHABET.charAt(letterPos+cryptedPos-ALPHABET.length());
 						
 					}else{
 						
 						cryptedLetter =  ALPHABET.charAt(letterPos+cryptedPos);
-						
 						
 					}
 					
