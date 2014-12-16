@@ -17,7 +17,7 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 public class CrypterXOR extends CrypterBasis implements Crypter{
 
 	private String key;
-	private final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@[\\]^_";
+	private final String ALPHABET = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_";
 
 	public CrypterXOR(String key){
 		this.key = key;
@@ -34,10 +34,12 @@ public class CrypterXOR extends CrypterBasis implements Crypter{
 	
 	private String xor(String message){
 		
+		//entfernt alle ungültigen Zeichen
 		message = removeChars(message);
 		
 		String crypted = "";
 		
+		//falls Schlüssel kürzer als Nachricht, dann wiederhole Schlüssel
 		if(message.length() > key.length()){
 			
 			int missing = message.length() - key.length();
@@ -55,20 +57,23 @@ public class CrypterXOR extends CrypterBasis implements Crypter{
 			int textValue = 0;
 			
 			for(int posKey = 0; posKey < ALPHABET.length(); posKey++){
-			
+				
+				//finde heraus, welche Stelle der Buchstabe von message im Alphabet hat
 				if(message.charAt(pos) == ALPHABET.charAt(posKey)){
 					
-					textValue = posKey;
+					textValue = (posKey);
 				}
 				
+				//finde heraus, welche Stelle der Buchstabe von Key im Alphabet hat
 				if(key.charAt(pos) == ALPHABET.charAt(posKey)){
 					
-					keyValue = posKey;
+					keyValue = (posKey);
 				}
 					
 			}
 			
-			crypted += ALPHABET.charAt(keyValue ^ textValue);
+			//füge den verschlüsselten Buchstaben hinzu
+			crypted += ALPHABET.charAt(textValue ^ keyValue);
 		}
 		
 		return crypted;

@@ -17,9 +17,9 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 public class CrypterCaesar extends CrypterBasis implements Crypter{
 
 	
-	private String key;
+	private char key;
 	
-	public CrypterCaesar(String key){
+	public CrypterCaesar(char key){
 		
 		this.key = key;
 		
@@ -30,10 +30,12 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 		
 		int cryptedPos = 0;
 		
-		while(!key.equals(ALPHABET.charAt(cryptedPos))){
+		/*
+		while(cryptedPos < ALPHABET.length() && !key.equals(ALPHABET.charAt(cryptedPos))){
 			
 			cryptedPos++;
-		}
+			System.out.println(cryptedPos);
+		}*/
 		
 		return cryptedPos;
 	}
@@ -118,23 +120,17 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 		
 		char cryptedLetter;
 		String cryptedMessage = "";
-		int cryption = cryptedPosition();
+		//int cryption = cryptedPosition();
 			
 		for(int posMsg = 0; posMsg < message.length(); posMsg++){
 			
-			cryption += letterPosition(message.charAt(posMsg));
+			if(message.charAt(posMsg) > ('Z'-key)){
 			
-			if(cryption > cryptedPosition()){
-							
-				cryptedLetter = ALPHABET.charAt(Math.abs(cryption-25));
-							
-			}else{
-				
-				cryptedLetter = ALPHABET.charAt(cryption);
-		
+				cryptedLetter = (char) ((message.charAt(posMsg)+key)-'Z');
+				System.out.println(cryptedLetter);
 			}
 						
-			cryptedMessage += cryptedLetter;
+			//cryptedMessage += cryptedLetter;
 						
 		}
 			
