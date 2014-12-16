@@ -17,9 +17,9 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 public class CrypterCaesar extends CrypterBasis implements Crypter{
 
 	
-	private char key;
+	private String key;
 	
-	public CrypterCaesar(char key){
+	public CrypterCaesar(String key){
 		
 		this.key = key;
 		
@@ -29,29 +29,22 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 	private int cryptedPosition(){
 		
 		int cryptedPos = 0;
-		
-		/*
-		while(cryptedPos < ALPHABET.length() && !key.equals(ALPHABET.charAt(cryptedPos))){
+
+		for(int pos = 0; pos < ALPHABET.length(); pos++){
 			
-			cryptedPos++;
-			System.out.println(cryptedPos);
-		}*/
-		
+			if(key.charAt(0) == ALPHABET.charAt(pos)){
+				
+				cryptedPos = pos+1;
+			}
+			
+			
+		}
+	
 		return cryptedPos;
 	}
 
 	
-	private int letterPosition(char letter){
-		
-		int letterPos = 0;
-		
-		while(letter !=ALPHABET.charAt(letterPos)){
-				
-			letterPos++;
-		}	
 
-		return letterPos;
-	}
 	
 	
 	@Override
@@ -75,8 +68,8 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 		
 		char cryptedLetter;
 		String cryptedMessage = "";
-		int cryption = cryptedPosition();
-			
+		//int cryption = cryptedPosition();
+		/*	
 		for(int posMsg = 0; posMsg < cypherText.length(); posMsg++){
 			
 			cryption -= letterPosition(cypherText.charAt(posMsg));
@@ -93,7 +86,7 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 						
 			cryptedMessage += cryptedLetter;
 						
-		}
+		}*/
 		
 		return cryptedMessage;
 	}
@@ -117,20 +110,38 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 	public String encrypt(String message) throws CrypterException {
 
 		message = removeChars(message);
-		
-		char cryptedLetter;
 		String cryptedMessage = "";
-		//int cryption = cryptedPosition();
-			
+		char cryptedLetter;	
+		
+		int cryptedPos = cryptedPosition();
+		
+		
+		
 		for(int posMsg = 0; posMsg < message.length(); posMsg++){
-			
-			if(message.charAt(posMsg) > ('Z'-key)){
-			
-				cryptedLetter = (char) ((message.charAt(posMsg)+key)-'Z');
-				System.out.println(cryptedLetter);
-			}
+		
+			for(int letterPos = 0; letterPos < ALPHABET.length(); letterPos++){
+				
+				if(message.charAt(posMsg) == ALPHABET.charAt(letterPos)){
+					
+					if(letterPos+cryptedPos > ALPHABET.length() - cryptedPos){
 						
-			//cryptedMessage += cryptedLetter;
+						cryptedLetter = ALPHABET.charAt(letterPos+cryptedPos-ALPHABET.length());
+						
+					}else{
+						
+						cryptedLetter =  ALPHABET.charAt(letterPos+cryptedPos);
+						
+						
+					}
+					
+					cryptedMessage += cryptedLetter;
+					
+				}
+				
+			}
+			
+			
+			
 						
 		}
 			

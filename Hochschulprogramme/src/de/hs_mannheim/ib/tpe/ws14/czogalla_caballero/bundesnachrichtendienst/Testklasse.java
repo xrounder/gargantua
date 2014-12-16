@@ -25,14 +25,18 @@ public class Testklasse {
 		System.out.println(sub.encrypt("WIKIPEDIAISTINFORMATIV"));
 		System.out.println(xor.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
 		System.out.println(caes.encrypt("CAESAR"));
-		
+	
 		/*
-		Crypter caesar = CrypterFactory.createCrypter("U", CryptionMethod.CAESAR);
-		Crypter xor = CrypterFactory.createCrypter("TPEISTCOOL", CryptionMethod.XOR);
-		List<String> liste = Arrays.asList("DIES", "IST", "EIN", "TEST");
-		IterableCrypter iterableCrypter = new IterableCrypter(
-		new IterableCrypter(liste, caesar),
-		xor);
+		char bla = 34;
+		char hu = 20;
+		
+		System.out.println((char)(bla+hu)+ " "+(char)hu);
+		
+		
+		Crypter rev = CrypterFactory.createCrypter("U", CryptionMethod.REVERSE);
+		Crypter xor = CrypterFactory.createCrypter("TPERULES", CryptionMethod.XOR);
+		List<String> liste = Arrays.asList("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "IST", "EIN", "TEST");
+		IterableCrypter iterableCrypter = new IterableCrypter(new IterableCrypter(liste, xor), rev);
 		for (String cypherText : iterableCrypter) {
 		System.out.println(cypherText);
 		}*/
