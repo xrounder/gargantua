@@ -37,19 +37,7 @@ public class CrypterReverse  extends CrypterBasis implements Crypter{
 		return reverse(message);
 	}
 
-	@Override
-	public List<String> encrypt(List<String> messages) throws CrypterException {
-		
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : messages) {
-		
-			cryptedMessages.add(encrypt(message));
-		
-		}
-		
-		return cryptedMessages;
-	}
+
 
 	@Override
 	public String decrypt(String cypherText) throws CrypterException {
@@ -57,20 +45,6 @@ public class CrypterReverse  extends CrypterBasis implements Crypter{
 		return reverse(cypherText);
 	}
 
-	@Override
-	public List<String> decrypt(List<String> cypherTexte)
-			throws CrypterException {
-		
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : cypherTexte) {
-		
-			cryptedMessages.add(decrypt(message));
-		
-		}
-		
-		return cryptedMessages;
-		
-	}
+	
 
 }

@@ -43,23 +43,7 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 	}
 
 	
-
 	
-	
-	@Override
-	public List<String> encrypt(List<String> messages) throws CrypterException {
-		
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : messages) {
-		
-			cryptedMessages.add(encrypt(message));
-		
-		}
-		
-		return cryptedMessages;
-	}
-
 	@Override
 	public String decrypt(String cypherText) throws CrypterException {
 		
@@ -100,20 +84,7 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 	}
 
 	
-	@Override
-	public List<String> decrypt(List<String> cypherTexte)
-			throws CrypterException {
-		
-		
-		List<String> decryptedMessages = new ArrayList<>();
-		
-		for (String message : cypherTexte) {
-		
-			decryptedMessages.add(decrypt(message));
-		
-		}
-		return decryptedMessages;
-	}
+	
 
 	@Override
 	public String encrypt(String message) throws CrypterException {
