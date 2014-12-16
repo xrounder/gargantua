@@ -1,7 +1,6 @@
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst;
 
 import java.util.Iterator;
-import java.util.List;
 
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;

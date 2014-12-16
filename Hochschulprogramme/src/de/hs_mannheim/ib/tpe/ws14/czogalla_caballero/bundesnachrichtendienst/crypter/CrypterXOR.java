@@ -3,9 +3,6 @@
  */
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CrypterBasis;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
@@ -20,7 +17,7 @@ public class CrypterXOR extends CrypterBasis implements Crypter{
 	private final String ALPHABET = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_";
 
 	public CrypterXOR(String key){
-		this.key = key;
+		super(key);
 	}
 	
 	public String getKey(){
@@ -31,7 +28,30 @@ public class CrypterXOR extends CrypterBasis implements Crypter{
 		this.key = key;
 	}
 	
-	
+	//wird überschrieben, da bei XOR die zusätzlichen Zeichen [ @ \ ] ^ _ erlaubt sind und nicht gelöscht werden sollen
+	@Override
+	protected String removeChars(String text){
+		
+		text = text.trim();
+		text = text.toUpperCase();
+		String removed = "";
+		
+		for(int pos = 0; pos < text.length(); pos++){
+			
+			for(int posAlph = 0; posAlph < this.ALPHABET.length(); posAlph++){
+				
+				if(text.charAt(pos) == this.ALPHABET.charAt(posAlph)){
+					
+					removed += text.charAt(pos);
+					
+				}
+				
+			}
+			
+		}
+		
+		return removed;
+	}
 	private String xor(String message){
 		
 		//entfernt alle ungültigen Zeichen
@@ -88,36 +108,10 @@ public class CrypterXOR extends CrypterBasis implements Crypter{
 	}
 
 	@Override
-	public List<String> encrypt(List<String> messages) throws CrypterException {
-		
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : messages) {
-		
-			cryptedMessages.add(encrypt(message));
-		
-		}
-		
-		return cryptedMessages;
-	}
-
-	@Override
 	public String decrypt(String cypherText) throws CrypterException {
 		
 		return xor(cypherText);
 	}
 
-	@Override
-	public List<String> decrypt(List<String> cypherTexte) throws CrypterException{
-	List<String> cryptedMessages = new ArrayList<>();
-	
-	for (String message : cypherTexte) {
-	
-		cryptedMessages.add(decrypt(message));
-	
-	}
-	
-	return cryptedMessages;
-	}
 
 }

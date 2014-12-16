@@ -1,25 +1,17 @@
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CrypterBasis;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
 public class CrypterSubstitution extends CrypterBasis implements Crypter{
 
-	private String key;
 	
 	public CrypterSubstitution(String key){
 		
-		if(key.length() == 26){
-			this.key = key;
-		}
+			super(key);
 		
 	}
-	
-	
 	
 	
 	@Override
@@ -46,20 +38,6 @@ public class CrypterSubstitution extends CrypterBasis implements Crypter{
 	}
 
 	@Override
-	public List<String> encrypt(List<String> messages) throws CrypterException {
-
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : messages) {
-		
-			cryptedMessages.add(encrypt(message));
-		
-		}
-		
-		return cryptedMessages;
-	}
-
-	@Override
 	public String decrypt(String cypherText) throws CrypterException {
 		
 		cypherText = removeChars(cypherText);
@@ -81,20 +59,6 @@ public class CrypterSubstitution extends CrypterBasis implements Crypter{
 		return crypted;
 	}
 
-	@Override
-	public List<String> decrypt(List<String> cypherTexte)
-			throws CrypterException {
-		
-		List<String> cryptedMessages = new ArrayList<>();
-		
-		for (String message : cypherTexte) {
-		
-			cryptedMessages.add(decrypt(message));
-		
-		}
-		
-		return cryptedMessages;
 	
-	}
 
 }

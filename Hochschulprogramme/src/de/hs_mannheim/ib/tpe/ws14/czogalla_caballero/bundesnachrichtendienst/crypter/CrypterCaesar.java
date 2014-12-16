@@ -17,11 +17,10 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exc
 public class CrypterCaesar extends CrypterBasis implements Crypter{
 
 	
-	private String key;
 	
 	public CrypterCaesar(String key){
 		
-		this.key = key;
+		super(key);
 		
 	}
 
@@ -76,10 +75,10 @@ public class CrypterCaesar extends CrypterBasis implements Crypter{
 				
 				if(cypherText.charAt(posMsg) == ALPHABET.charAt(letterPos)){
 					
-					if(letterPos-cryptedPos < cryptedPos){
-						
-						cryptedLetter = ALPHABET.charAt(ALPHABET.length()- Math.abs(letterPos-cryptedPos)-1);
-						
+					if(letterPos-cryptedPos < 0){
+					
+						cryptedLetter = ALPHABET.charAt(ALPHABET.length() - Math.abs(letterPos-cryptedPos));
+	
 					}else{
 						
 						cryptedLetter =  ALPHABET.charAt(letterPos-cryptedPos);
