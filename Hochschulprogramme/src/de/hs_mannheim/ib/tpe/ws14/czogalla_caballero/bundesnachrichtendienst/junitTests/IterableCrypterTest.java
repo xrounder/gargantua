@@ -52,7 +52,7 @@ public class IterableCrypterTest {
 		for (String cypherText : iterableDecrypter) {
 			
 			assertEquals("JETZTXISTXTPEXAUCHXBALDXGESCHAFFTXEINXFROHESXFESTXWUENSCHEXICH", cypherText);
-		
+			System.out.println(cypherText);
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class IterableCrypterTest {
 		for (String cypherText : iterableCrypter) {
 			
 			assertEquals("QOZEG]A[UXDKZIZLAB\\NUQIO^^RXYHADV[EFFJ\\\\[\\U_]YDVZABDZT\\V\\SKB@X", cypherText);
-		
+			
 		}
 		
 	}

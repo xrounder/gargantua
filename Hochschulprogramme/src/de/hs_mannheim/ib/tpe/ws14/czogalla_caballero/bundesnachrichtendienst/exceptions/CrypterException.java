@@ -16,11 +16,11 @@ public class CrypterException extends Throwable{
 	private static final long serialVersionUID = 1L;
 	
 	public CrypterException(){
-		
+		super();
 	}
 	
 	public CrypterException(String  message){
-		System.out.println(message);
+		super(message);
 	}
 	
 }

@@ -63,6 +63,7 @@ public class CrypterCaesar extends CrypterBasis {
 	@Override
 	public String decrypt(String cypherText) throws CrypterException {
 
+		
 		String cryptedMessage = "";
 
 		
@@ -100,7 +101,7 @@ public class CrypterCaesar extends CrypterBasis {
 			}
 		
 		return cryptedMessage;
-
+		
 	}
 
 	@Override
