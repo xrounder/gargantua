@@ -11,12 +11,21 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.cry
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
 /**
- * @author 1414163
+ * Umkehrverschlüsselung, die den Text rückwärts zurückgibt
+ *
+ * @author Miguel Caballero 1414163, Dennis Czogalla 1410116
+ * @created 17.12.2014
  *
  */
-public class CrypterReverse  extends CrypterBasis implements Crypter{
+public class CrypterReverse  extends CrypterBasis {
 
-
+	/**
+	 * dreht den Spieß um
+	 * 
+	 * @param message
+	 * @return reversed gedrehter Spieß
+	 * @returnType String
+	 */
 	private String reverse(String message){
 		message = removeChars(message);
 		String reversed = "";
@@ -43,6 +52,12 @@ public class CrypterReverse  extends CrypterBasis implements Crypter{
 	public String decrypt(String cypherText) throws CrypterException {
 		
 		return reverse(cypherText);
+	}
+
+	@Override
+	protected boolean checkKey(String key) {
+		
+		return true;
 	}
 
 	

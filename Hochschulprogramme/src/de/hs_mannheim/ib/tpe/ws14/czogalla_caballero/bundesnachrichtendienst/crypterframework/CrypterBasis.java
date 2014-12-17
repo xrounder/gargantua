@@ -5,7 +5,14 @@ import java.util.List;
 
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
-public abstract class CrypterBasis {
+/**
+ * @summary abtrakte Klasse für alle verschlüsselung
+ *
+ * @author Miguel Caballero 1414163, Dennis Czogalla 1410116
+ * @created 17.12.2014
+ *
+ */
+public abstract class CrypterBasis implements Crypter {
 
 	protected final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
@@ -20,14 +27,15 @@ public abstract class CrypterBasis {
 	public CrypterBasis(){
 		
 		
-	}
+	}	
 	
-	public String getAlphabet(){
-		
-		return ALPHABET;
-	}
-	
-	//entfernt alle ungültigen/nicht erlaubten Zeichen aus dem String
+	/**
+	 * entfernt alle ungültigen/nicht erlaubten Zeichen aus dem String
+	 * 
+	 * @param text
+	 * @return removed gibt den gekürzten Text zurück
+	 * @returnType String
+	 */
 	protected String removeChars(String text){
 		
 		text = text.trim();
@@ -51,21 +59,23 @@ public abstract class CrypterBasis {
 		return removed;
 	}
 	
+	protected abstract boolean checkKey(String key);
+	
 	public abstract String encrypt(String message) throws CrypterException; 
 	
 	public abstract String decrypt(String cypherText) throws CrypterException;
 	
 	public List<String> encrypt(List<String> messages) throws CrypterException {
 		
-		List<String> cryptedMessages = new ArrayList<>();
+		List<String> encryptedMessages = new ArrayList<>();
 		
 		for (String message : messages) {
 		
-			cryptedMessages.add(encrypt(message));
+			encryptedMessages.add(encrypt(message));
 		
 		}
 		
-		return cryptedMessages;
+		return encryptedMessages;
 	}
 	
 	public List<String> decrypt(List<String> cypherTexte) throws CrypterException{

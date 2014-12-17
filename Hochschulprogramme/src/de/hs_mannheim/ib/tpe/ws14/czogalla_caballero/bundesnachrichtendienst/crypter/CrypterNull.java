@@ -8,12 +8,19 @@ import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.cry
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.CrypterException;
 
 /**
- * @author 1414163
+ * Verschlüsselung, die nichts tut
+ *
+ * @author Miguel Caballero 1414163, Dennis Czogalla 1410116
+ * @created 17.12.2014
  *
  */
-public class CrypterNull extends CrypterBasis implements Crypter{
+public class CrypterNull extends CrypterBasis{
 
 
+	public CrypterNull (String key){
+		
+	}
+	
 	@Override
 	public String encrypt(String message) throws CrypterException {
 		message = removeChars(message);
@@ -24,6 +31,12 @@ public class CrypterNull extends CrypterBasis implements Crypter{
 	public String decrypt(String cypherText) throws CrypterException {
 		cypherText = removeChars(cypherText);
 		return cypherText;
+	}
+
+	@Override
+	protected boolean checkKey(String key) {
+		
+		return true;
 	}
 
 	

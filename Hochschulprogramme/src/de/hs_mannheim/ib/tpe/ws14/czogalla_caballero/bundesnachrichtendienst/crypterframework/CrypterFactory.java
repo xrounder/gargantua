@@ -1,15 +1,13 @@
 /**
  * 
  */
-package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst;
+package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework;
 
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterCaesar;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterNull;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterReverse;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterSubstitution;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypter.CrypterXOR;
-import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.Crypter;
-import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.crypterframework.CryptionMethod;
 import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.exceptions.IllegalKeyException;
 
 /**
@@ -39,7 +37,7 @@ public class CrypterFactory {
 				returnCrypter = new CrypterXOR(key);
 				break;
 			case NULL:
-				returnCrypter = new CrypterNull();
+				returnCrypter = new CrypterNull(key);
 				break;
 			default:;
 				//IllegalKeyException();
