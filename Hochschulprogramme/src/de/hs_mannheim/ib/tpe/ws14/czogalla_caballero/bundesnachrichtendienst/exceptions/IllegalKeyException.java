@@ -10,4 +10,11 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.bundesnachrichtendienst.ex
 @SuppressWarnings("serial")
 public class IllegalKeyException extends CrypterException {
 
+	public IllegalKeyException(){
+		super();
+	}
+	
+	public IllegalKeyException(String message){
+		super(message);
+	}
 }

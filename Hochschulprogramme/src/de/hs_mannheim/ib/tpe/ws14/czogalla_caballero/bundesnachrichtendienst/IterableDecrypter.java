@@ -42,6 +42,12 @@ public class IterableDecrypter implements Iterable<String> {
 			
 				return null;
 			}
+
+			@Override
+			public void remove() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 	}
 
