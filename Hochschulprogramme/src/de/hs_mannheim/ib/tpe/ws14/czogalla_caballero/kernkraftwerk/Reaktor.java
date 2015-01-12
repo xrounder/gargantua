@@ -12,9 +12,9 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
  */
 public class Reaktor implements Runnable{
 
-	final int ERWAERMUNGSKOEFFIZIENT = 42;
-	final int KRITISCHE_TEMP = 2878;
-	double abwaerme = 0;
+	private final int ERWAERMUNGSKOEFFIZIENT = 42;
+	private final int KRITISCHE_TEMP = 2878;
+	private double abwaerme = 0;
 	
 	
 	@Override
@@ -28,7 +28,7 @@ public class Reaktor implements Runnable{
 			try{
 				Thread.sleep(1000);
 				abwaerme += ERWAERMUNGSKOEFFIZIENT;
-				System.out.println(abwaerme);
+				Ausgabe.ausgeben("" + abwaerme);
 			} catch (InterruptedException e){
 				break;
 			}
