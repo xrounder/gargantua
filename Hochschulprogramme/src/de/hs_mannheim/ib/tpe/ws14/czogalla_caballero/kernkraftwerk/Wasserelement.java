@@ -13,8 +13,6 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 public class Wasserelement {
 
 	double temperatur;
-	final int VOLUMEN = 100;
-	
 	
 	public Wasserelement(double temp){
 		

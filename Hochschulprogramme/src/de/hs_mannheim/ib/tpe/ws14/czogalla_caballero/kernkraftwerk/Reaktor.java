@@ -17,18 +17,20 @@ public class Reaktor implements Runnable{
 	private double abwaerme = 0;
 	
 	
+	
 	@Override
 	public void run() {
 		
 		while(abwaerme<KRITISCHE_TEMP){
 			
+				
 			if (Thread.currentThread().isInterrupted()){
 				break;
 			}
 			try{
 				Thread.sleep(1000);
 				abwaerme += ERWAERMUNGSKOEFFIZIENT;
-				Ausgabe.ausgeben("" + abwaerme);
+				Leitware.ausgeben("" + abwaerme);
 			} catch (InterruptedException e){
 				break;
 			}

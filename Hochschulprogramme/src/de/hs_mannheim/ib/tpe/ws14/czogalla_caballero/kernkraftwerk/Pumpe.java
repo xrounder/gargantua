@@ -19,7 +19,7 @@ public class Pumpe implements Runnable{
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		
 		while(true){
 			
@@ -28,7 +28,7 @@ public class Pumpe implements Runnable{
 			}
 			try{
 				Thread.sleep(1000);
-				Ausgabe.ausgeben("a");
+				Leitware.ausgeben("a");
 			} catch (InterruptedException e){
 				break;
 			}

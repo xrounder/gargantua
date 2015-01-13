@@ -4,6 +4,7 @@
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 
 import java.util.LinkedList;
+import java.util.TimerTask;
 
 /** 
  *
@@ -12,19 +13,57 @@ import java.util.LinkedList;
  *
  *@date 12.01.2015
  */
-public class Kuehlkreislauf {
+public class Kuehlkreislauf extends TimerTask{
 
-	private Wasserelement[] wasserkreislauf = new Wasserelement[12];
-	Pumpe pumpe;
+	private double[] wasserkreislauf = new double[12];
+	private int reaktorTemp;
+	private int kuehlwasserTemp;
 	
-	
-	public Kuehlkreislauf(Wasserelement[] wasserkreislauf, Pumpe pumpe){
+	public Kuehlkreislauf(int reaktorTemp, int kuehlwasserTemp){
 		
-		if (wasserkreislauf.length == 12){
-			this.wasserkreislauf = wasserkreislauf;
-			this.pumpe = pumpe;
-		}		
+		this.reaktorTemp = reaktorTemp;
+		this.kuehlwasserTemp = kuehlwasserTemp;
 		
 	}
+
+	private int abwaerme(){
+		
+		return (kuehlwasserTemp + reaktorTemp)/2;
+	}
+	
+	
+	
+	
+
+	@Override
+	public void run() {
+	
+		for(int element = 0; element < wasserkreislauf.length; element++){
+			
+			if(element < 6){
+				
+				wasserkreislauf[element] = abwaerme(); 
+			
+			}else{
+				
+				wasserkreislauf[element] = kuehlwasserTemp;
+				
+			}
+			
+			
+			
+		}
+		
+	}
+	
+	public void pumpen() {
+		synchronized (Locks.positionsLock) {
+			posReaktor++;
+			posFlusswasser++;
+			posReaktor = posReaktor % 12;
+			posFlusswasser = posFlusswasser % 12;
+		}
+	}
+	
 	
 }

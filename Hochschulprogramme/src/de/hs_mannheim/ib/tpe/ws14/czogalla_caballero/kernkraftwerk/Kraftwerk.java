@@ -17,6 +17,7 @@ public class Kraftwerk {
 
 	Kuehlkreislauf kreislauf;
 	
+	Reaktor reaktor;
 	
 	public Kraftwerk(){
 		

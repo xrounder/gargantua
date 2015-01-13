@@ -12,15 +12,10 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
  */
 public class Waermetauscher {
 
-	private int kuehlTemp;
-	private double ausgangsTemp;
-	private double eingangsTemp;
-	/**
-	 * @param kUEHLTEMP
-	 */
-	public Waermetauscher(int kuehlTemp) {
 		
-		this.kuehlTemp = kuehlTemp;
+	public double tauschen (double eTemp, int kTemp){
+		
+		return 0.5*(eTemp + kTemp);
 	}
 	
 	
