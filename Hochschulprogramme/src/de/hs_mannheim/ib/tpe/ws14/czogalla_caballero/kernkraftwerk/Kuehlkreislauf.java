@@ -3,8 +3,7 @@
  */
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 
-import java.util.LinkedList;
-import java.util.TimerTask;
+import java.util.ArrayList;
 
 /** 
  *stellt den Kühlkreislauf dar
@@ -15,27 +14,30 @@ import java.util.TimerTask;
  */
 public class Kuehlkreislauf{
 
-	private double[] wasserkreislauf = new double[12];
+	private ArrayList<Wasserelement> wasserkreislauf;
 
 	private int reaktorPos = 0;
 	private int flussPos = 6;
 	
 	
 	/**
+	 * gibt wasserkreislauf zurück
 	 * @return the wasserkreislauf
 	 */
-	public double[] getWasserkreislauf() {
+	public ArrayList<Wasserelement> getWasserkreislauf() {
 		return wasserkreislauf;
 	}
 
 	/**
+	 * setzt wasserkreislauf
 	 * @param wasserkreislauf the wasserkreislauf to set
 	 */
-	public void setWasserkreislauf(double[] wasserkreislauf) {
+	public void setWasserkreislauf(ArrayList<Wasserelement> wasserkreislauf) {
 		this.wasserkreislauf = wasserkreislauf;
 	}
 
 	/**
+	 * gibt reaktorPosition zurück
 	 * @return the reaktorPos
 	 */
 	public int getReaktorPos() {
@@ -43,6 +45,7 @@ public class Kuehlkreislauf{
 	}
 
 	/**
+	 * setzt reaktorPosition
 	 * @param reaktorPos the reaktorPos to set
 	 */
 	public void setReaktorPos(int reaktorPos) {
@@ -50,6 +53,7 @@ public class Kuehlkreislauf{
 	}
 
 	/**
+	 * gibt flussPosition zurück
 	 * @return the flussPos
 	 */
 	public int getFlussPos() {
@@ -57,17 +61,24 @@ public class Kuehlkreislauf{
 	}
 
 	/**
+	 * setzt flussPosition
 	 * @param flussPos the flussPos to set
 	 */
 	public void setFlussPos(int flussPos) {
 		this.flussPos = flussPos;
 	}
 
-	
-	public Kuehlkreislauf(int reaktorTemp, int flussTemp){
+	/**
+	 * Konstruktor
+	 */
+	public Kuehlkreislauf() {
 		
-		this.wasserkreislauf[reaktorPos]  = reaktorTemp;
-		this.wasserkreislauf[flussPos]  = flussTemp;
+		wasserkreislauf = new ArrayList<>(12);
+		
+		for (int i = 0; i < 12; i++) {
+			
+			wasserkreislauf.add(new Wasserelement());
+		}
 	}
 	
 	/**
@@ -77,6 +88,8 @@ public class Kuehlkreislauf{
 	
 		reaktorPos++;
 		flussPos++;
+		//reaktorPos=reaktorPos%12;
+		//flussPos = flussPos%12;
 		
 		if(reaktorPos >= 12){
 			reaktorPos = 0;

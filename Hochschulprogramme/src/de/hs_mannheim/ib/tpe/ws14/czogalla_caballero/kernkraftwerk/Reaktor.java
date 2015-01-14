@@ -3,101 +3,85 @@
  */
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 
-/** 
- *REaktor eines Kernkraftwerks
+/**
+ * Reaktor eines Kernkraftwerks
  *
- *@author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
+ * @author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  *
- *@date 12.01.2015
+ * @date 12.01.2015
  */
-public class Reaktor implements Runnable{
+public class Reaktor implements Runnable {
 
-	private final int ERWAERMUNGSKOEFFIZIENT = 42;
-	private final int KRITISCHE_TEMP = 2878;
-	private double abwaerme = 0;
-	private Kuehlkreislauf kreislauf;
-	private double eTemp;
+	private final int abwaerme;
+	final static int KRITISCHE_TEMP = 2878;
+	private volatile boolean kernschmelze = false;
+	private Wasserelement wasser;
 	
 	/**
-	 * @return the abwaerme
+	 * @return the kernschmelze
 	 */
-	public double getAbwaerme() {
-		return abwaerme;
+	public boolean isKernschmelze() {
+		return kernschmelze;
 	}
 
-
 	/**
-	 * @param abwaerme the abwaerme to set
+	 * @param kernschmelze the kernschmelze to set
 	 */
-	public void setAbwaerme(double abwaerme) {
+	public void setKernschmelze(boolean kernschmelze) {
+		this.kernschmelze = kernschmelze;
+	}
+
+	
+	/**
+	 * Konstruktor
+	 *
+	 * @param wasser
+	 * @param abwaerme
+	 */
+	public Reaktor(Wasserelement wasser, int abwaerme) {
+		this.wasser = wasser;
 		this.abwaerme = abwaerme;
 	}
 
-
 	/**
-	 * @return the kreislauf
+	 * Gibt das Wasserelement des Reaktors zurueck
+	 *
+	 * @return der Wasserelement
 	 */
-	public Kuehlkreislauf getKreislauf() {
-		return kreislauf;
+	public Wasserelement getWasser() {
+		return wasser;
 	}
 
-
 	/**
-	 * @param kreislauf the kreislauf to set
+	 *setzt wasser
+	 *
+	 * @param wasser
 	 */
-	public void setKreislauf(Kuehlkreislauf kreislauf) {
-		this.kreislauf = kreislauf;
-	}
-
-
-	/**
-	 * @return the eTemp
-	 */
-	public double geteTemp() {
-		return eTemp;
-	}
-
-
-	/**
-	 * @param eTemp the eTemp to set
-	 */
-	public void seteTemp(double eTemp) {
-		this.eTemp = eTemp;
-	}
-
-
-	public Reaktor (Kuehlkreislauf kreislauf){
-		this.kreislauf=kreislauf;
-		
+	public void setWasser(Wasserelement wasser) {
+		this.wasser = wasser;
 	}
 	
-	
-	@Override
+	/**
+	 *Thread läuft hier ab
+	 */
 	public synchronized void run() {
 		
-		int zaehler = 0;
+		while (!kernschmelze) {
 		
-		while(abwaerme<KRITISCHE_TEMP && zaehler < 20){
+			wasser.setTemperatur(wasser.getTemperatur() + 1);
 			
+			if (wasser.getTemperatur() >= KRITISCHE_TEMP) {
 				
-			if (Thread.currentThread().isInterrupted()){
+				System.out.println("KRAFTWERK IST EXPLODIERT!");
+				this.kernschmelze = true;
+			}
+			try {
+				wait(Math.round(1000.0 / abwaerme));
+				
+			} catch (InterruptedException e) {
+				System.out.println("Reaktor wurde heruntergefahren");
 				break;
 			}
-			try{
-				Thread.sleep(1000);
-				abwaerme = kreislauf.getWasserkreislauf()[kreislauf.getReaktorPos()] + ERWAERMUNGSKOEFFIZIENT;
-				//kreislauf.getWasserkreislauf()[kreislauf.getReaktorPos()] = abwaerme; 
-			} catch (InterruptedException e){
-				break;
-			}
-		}
-		
-		if(zaehler >= 20){
-			System.out.println("Reaktor heruntergefahren.");
-		}else{
-			System.out.println("Kernschmelze");
-
 		}
 	}
-
 }

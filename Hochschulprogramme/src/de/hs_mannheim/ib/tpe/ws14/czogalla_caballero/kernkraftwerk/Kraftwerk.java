@@ -3,6 +3,8 @@
  */
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 
+import de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk.locks.Lock;
+
 /**
  *Stellt ein Kraftwerk dar
  *
@@ -18,6 +20,14 @@ public class Kraftwerk implements Runnable{
 	private Pumpe pumpe;
 	private Reaktor reaktor;
 
+	/**
+	 * Konstruktor
+	 * @param reaktorKühlung
+	 * @param flusswasserKühlung
+	 * @param kreislauf
+	 * @param pumpe
+	 * @param reaktor
+	 */
 	public Kraftwerk(Waermetauscher reaktorKühlung, Waermetauscher flusswasserKühlung,
 			Kuehlkreislauf kreislauf, Pumpe pumpe, Reaktor reaktor) {
 		
@@ -28,37 +38,44 @@ public class Kraftwerk implements Runnable{
 		this.reaktor = reaktor;
 	}
 
-	
+	/**
+	 * hier läuft Thread ab
+	 */
 	public synchronized void run(){
 	
 		Thread tReaktor = new Thread(reaktor);
 		Thread tPumpe = new Thread(pumpe);
 		tReaktor.start();
 		tPumpe.start();
+		int zaehler=1;
 		
-		while(true){
+		while (zaehler <= 20 && !reaktor.isKernschmelze()) {
 			
-			kreislauf.getWasserkreislauf()[kreislauf.getReaktorPos()] =
-					reaktorKühlung.tauschen(reaktor.getAbwaerme(), kreislauf.getWasserkreislauf()[kreislauf.getReaktorPos()]);
-			
-			kreislauf.getWasserkreislauf()[kreislauf.getFlussPos()] =
-					flusswasserKühlung.tauschen(10, kreislauf.getWasserkreislauf()[kreislauf.getFlussPos()]);
-			
-			Leitware.ausgeben(reaktor.getAbwaerme(), kreislauf.getWasserkreislauf()[kreislauf.getFlussPos()]);
-		
-			if (Thread.currentThread().isInterrupted()){
-				break;
-			}
-			try{
-				tPumpe.join();
+			synchronized (Lock.posLock) {
 				
-			} catch (InterruptedException e){
+				reaktorKühlung.tauschen(kreislauf.getWasserkreislauf().get(kreislauf.getReaktorPos()), reaktor.getWasser());
+				flusswasserKühlung.tauschen(kreislauf.getWasserkreislauf().get(kreislauf.getFlussPos()), new Wasserelement());
+			
+			}
+			
+			Leitware.ausgeben(reaktorKühlung.getAusgangsTemp(), flusswasserKühlung.getAusgangsTemp());
+			
+			zaehler++;
+			
+			try {
+				wait(1000);
+			} catch (InterruptedException e) {
 				break;
 			}
-		
-		
-		
 		}
+		if (reaktor.isKernschmelze()) {
+			pumpe.setKernschmelze(true);
+			
+		} else {
+			tReaktor.interrupt();
+			tPumpe.interrupt();
+		}
+		
 		
 	}
 }

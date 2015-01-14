@@ -12,8 +12,12 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
  */
 public class Leitware {
 
-	
+	/**
+	 * gibt die übergebenen Temperaturen aus
+	 * @param reaktorTemp
+	 * @param flussTemp
+	 */
 	public static void ausgeben(double reaktorTemp, double flussTemp){
-		System.out.println("Temperatur Reaktor: " + reaktorTemp + ", Temperatur Rückfluss in Rhein " + flussTemp);
+		System.out.println("Temperatur Reaktor: " + Math.round(reaktorTemp) + ", Temperatur Rückfluss in Rhein " + Math.round(flussTemp));
 	}
 }
