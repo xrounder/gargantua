@@ -4,7 +4,7 @@
 package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 
 /** 
- *
+ *Pumpt das Wasser mit angegebener Leistung in einem Kühlkreislauf
  *
  *@author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  *
@@ -13,9 +13,11 @@ package de.hs_mannheim.ib.tpe.ws14.czogalla_caballero.kernkraftwerk;
 public class Pumpe implements Runnable{
 
 	private double pumpleistung;
+	private Kuehlkreislauf kuehlkreislauf;
 	
-	public Pumpe(double pumpleistung){
+	public Pumpe(double pumpleistung, Kuehlkreislauf kuehlkreislauf){
 		this.pumpleistung = pumpleistung;
+		this.kuehlkreislauf = kuehlkreislauf;
 	}
 	
 	@Override
@@ -27,8 +29,9 @@ public class Pumpe implements Runnable{
 				break;
 			}
 			try{
-				Thread.sleep(1000);
-				Leitware.ausgeben("a");
+				kuehlkreislauf.pumpen();
+				Thread.sleep(Math.round(1000 / pumpleistung));
+				
 			} catch (InterruptedException e){
 				break;
 			}

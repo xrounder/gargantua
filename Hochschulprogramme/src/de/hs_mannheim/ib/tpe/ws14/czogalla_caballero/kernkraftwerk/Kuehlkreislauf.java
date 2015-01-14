@@ -7,61 +7,82 @@ import java.util.LinkedList;
 import java.util.TimerTask;
 
 /** 
- *
+ *stellt den Kühlkreislauf dar
  *
  *@author Miguel Caballero (Matr.Nr.1414163), Dennis Czogalla (Matr.Nr.1410116)
  *
  *@date 12.01.2015
  */
-public class Kuehlkreislauf extends TimerTask{
+public class Kuehlkreislauf{
 
 	private double[] wasserkreislauf = new double[12];
-	private int reaktorTemp;
-	private int kuehlwasserTemp;
+
+	private int reaktorPos = 0;
+	private int flussPos = 6;
 	
-	public Kuehlkreislauf(int reaktorTemp, int kuehlwasserTemp){
-		
-		this.reaktorTemp = reaktorTemp;
-		this.kuehlwasserTemp = kuehlwasserTemp;
-		
+	
+	/**
+	 * @return the wasserkreislauf
+	 */
+	public double[] getWasserkreislauf() {
+		return wasserkreislauf;
 	}
 
-	private int abwaerme(){
-		
-		return (kuehlwasserTemp + reaktorTemp)/2;
+	/**
+	 * @param wasserkreislauf the wasserkreislauf to set
+	 */
+	public void setWasserkreislauf(double[] wasserkreislauf) {
+		this.wasserkreislauf = wasserkreislauf;
 	}
-	
-	
-	
-	
 
-	@Override
-	public void run() {
+	/**
+	 * @return the reaktorPos
+	 */
+	public int getReaktorPos() {
+		return reaktorPos;
+	}
+
+	/**
+	 * @param reaktorPos the reaktorPos to set
+	 */
+	public void setReaktorPos(int reaktorPos) {
+		this.reaktorPos = reaktorPos;
+	}
+
+	/**
+	 * @return the flussPos
+	 */
+	public int getFlussPos() {
+		return flussPos;
+	}
+
+	/**
+	 * @param flussPos the flussPos to set
+	 */
+	public void setFlussPos(int flussPos) {
+		this.flussPos = flussPos;
+	}
+
 	
-		for(int element = 0; element < wasserkreislauf.length; element++){
-			
-			if(element < 6){
-				
-				wasserkreislauf[element] = abwaerme(); 
-			
-			}else{
-				
-				wasserkreislauf[element] = kuehlwasserTemp;
-				
-			}
-			
-			
-			
-		}
+	public Kuehlkreislauf(int reaktorTemp, int flussTemp){
 		
+		this.wasserkreislauf[reaktorPos]  = reaktorTemp;
+		this.wasserkreislauf[flussPos]  = flussTemp;
 	}
 	
+	/**
+	 * Hier wird das Wasser weiter gepumpt
+	 */
 	public void pumpen() {
-		synchronized (Locks.positionsLock) {
-			posReaktor++;
-			posFlusswasser++;
-			posReaktor = posReaktor % 12;
-			posFlusswasser = posFlusswasser % 12;
+	
+		reaktorPos++;
+		flussPos++;
+		
+		if(reaktorPos >= 12){
+			reaktorPos = 0;
+		}
+		if(flussPos >= 12){
+			flussPos = 0;
 		}
 	}
 	
